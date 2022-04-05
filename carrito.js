@@ -51,12 +51,9 @@ class Carrito {
     if (viejoCarrito != null) {
       const productos = viejoCarrito.productos;
       const index = productos.map(elem => elem.id).indexOf(idProducto)
-      console.log(productos.map(elem => elem.id))
-      console.log(index)
 
       if(index != -1) {
         productos.splice(index, 1);
-        console.log(productos)
         await this.contenedor.updateById(
           { productos: productos },
           idCarrito
