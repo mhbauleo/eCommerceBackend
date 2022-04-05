@@ -21,46 +21,43 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
-  if (admin) {
-    const nuevoProducto = req.body;
-    const nuevoId = await productos.postProducto(nuevoProducto);
+router.post("/", confirmarPermisos, async (req, res) => {
+  const nuevoProducto = req.body;
+  const nuevoId = await productos.postProducto(nuevoProducto);
 
-    if (nuevoId != 0) {
-      res.json({ nuevoProducto, nuevoId });
-    } else {
-      res.json({ error: "Producto inválido" });
-    }
+  if (nuevoId != 0) {
+    res.json({ nuevoProducto, nuevoId });
   } else {
-    res.json({ error: -1, descripcion: "error" });
+    res.json({ error: "Producto inválido" });
   }
 });
 
-router.put("/:id", async (req, res) => {
-  if (admin) {
-    const nuevoProducto = req.body;
+router.put("/:id", confirmarPermisos, async (req, res) => {
+  const nuevoProducto = req.body;
 
-    if (await productos.putProducto(nuevoProducto, Number(req.params.id))) {
-      res.json({ mensaje: "Actualizado con éxito" });
-    } else {
-      res.json({ error: "No se pudo actualizar" });
-    }
+  if (await productos.putProducto(nuevoProducto, Number(req.params.id))) {
+    res.json({ mensaje: "Actualizado con éxito" });
   } else {
-    res.json({ error: -1, descripcion: "error" });
+    res.json({ error: "No se pudo actualizar" });
   }
 });
 
-router.delete("/:id", async (req, res) => {
-  if (admin) {
-    if (await productos.deleteProducto(Number(req.params.id))) {
-      res.json({ mensaje: "Borrado con éxito" });
-    } else {
-      res.json({ error: "Producto no encontrado" });
-    }
-
+router.delete("/:id", confirmarPermisos, async (req, res) => {
+  if (await productos.deleteProducto(Number(req.params.id))) {
+    res.json({ mensaje: "Borrado con éxito" });
   } else {
-    res.json({ error: -1, descripcion: "error" });
+    res.json({ error: "No se pudo borrar" });
   }
 });
+
+// Middleware
+
+function confirmarPermisos(req, res, next) {
+  if (admin) {
+    next();
+  } else {
+    res.json({ error: -1, descripcion: `ruta /api/productos método ${req.method} no autorizada` });
+  }
+}
 
 module.exports = router;

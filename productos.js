@@ -1,4 +1,6 @@
 const Contenedor = require("./contenedor");
+const CANTIDAD_DE_CAMPOS = 6
+
 
 class Productos {
   constructor(archivo) {
@@ -54,6 +56,7 @@ class Productos {
 
   esProductoValido(producto) {
     return (
+      Object.keys(producto).length == CANTIDAD_DE_CAMPOS &&
       producto.hasOwnProperty("nombre") &&
       producto.hasOwnProperty("descripcion") &&
       producto.hasOwnProperty("codigo") &&
