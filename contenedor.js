@@ -23,6 +23,7 @@ class Contenedor {
     return nuevoId;
   }
 
+  // Devuelve null en caso de no encontrar el objeto
   async getById(idBuscado) {
     let res = null;
     const datos = await this.getArray();
