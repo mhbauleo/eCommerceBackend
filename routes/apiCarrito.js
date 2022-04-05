@@ -12,24 +12,26 @@ router.post("/", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   if (await carrito.deleteCarrito(Number(req.params.id))) {
-    res.json({ mensaje: "Borrado con éxito" });
+    res.json({ mensaje: "Carrito borrado con éxito" });
+  } else {
+    res.json({ error: "No se pudo borrar" });
+  }
+});
+
+router.get("/:id/productos", async (req, res) => {
+  const productos = await carrito.getProductos(Number(req.params.id));
+  if (productos != null) {
+    res.json(productos);
   } else {
     res.json({ error: "Carrito no encontrado" });
   }
 });
 
-router.get("/:id/productos", async (req, res) => {
-  res.json(await carrito.getProductos(Number(req.params.id)));
-});
-
-router.post("/:id/productos", async (req, res) => {
-  console.log(typeof req.body)
-  console.log(req.body)
-
-  if (await carrito.postProducto(Number(req.params.id), Number(req.body.id_prod))) {
-    res.json({ ok : "ok"});
+router.post("/:id/productos/:id_prod", async (req, res) => {
+  if (await carrito.postProducto(Number(req.params.id), Number(req.params.id_prod))) {
+    res.json({ mensaje : "Producto agregado con éxito"});
   } else {
-    res.json({ error: "Producto no encontrado" });
+    res.json({ error: "No se pudo agregar el producto" });
   }
 });
 
@@ -37,7 +39,7 @@ router.delete("/:id/productos/:id_prod", async (req, res) => {
   if (await carrito.deleteProducto(Number(req.params.id), Number(req.params.id_prod))) {
     res.json({ mensaje: "Borrado con éxito" });
   } else {
-    res.json({ error: "Producto no encontrado" });
+    res.json({ error: "No se pudo borrar" });
   }
 });
 
