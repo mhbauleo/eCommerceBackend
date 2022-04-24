@@ -16,7 +16,8 @@ class ContenedorFirebase {
 
   async save(objeto) {
     try {
-      const newElement = await this.collection.add(objeto);
+      const newTimestamp = Date.now()
+      const newElement = await this.collection.add({...objeto, timestamp : newTimestamp});
       return newElement.id;
     } catch (e) {
       console.log(e);
@@ -48,8 +49,9 @@ class ContenedorFirebase {
 
   async updateById(newObject, id) {
     try {
+      const newTimestamp = Date.now()
       const doc = this.collection.doc(`${id}`);
-      await doc.update(newObject);
+      await doc.update({...newObject , timestamp : newTimestamp});
       return 1;
     } catch (e) {
       console.log(e);
