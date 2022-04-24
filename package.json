@@ -12,7 +12,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.3",
+    "firebase-admin": "^10.1.0",
     "knex": "^1.0.5",
+    "mongoose": "^6.3.0",
     "mysql": "^2.18.1"
   }
 }

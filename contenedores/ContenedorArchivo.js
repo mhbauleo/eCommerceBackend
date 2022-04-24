@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-class Contenedor {
+class ContenedorArchivo {
   constructor(archivo) {
     this.archivo = archivo;
   }
@@ -29,7 +29,7 @@ class Contenedor {
     const datos = await this.getArray();
 
     for (const dato of datos) {
-      if (dato.id === idBuscado) res = dato;
+      if (dato.id == idBuscado) res = dato;
     }
     return res;
   }
@@ -39,22 +39,26 @@ class Contenedor {
   }
 
   async updateById(newObject, id) {
+    let modifiedCount = 0
     const datosViejos = await this.getArray();
     const datosNuevos = datosViejos.map((elem) => {
-      if (elem.id === id) {
+      if (elem.id == id) {
         const newTimestamp = Date.now()
+        modifiedCount++
         return { ...newObject, timestamp: newTimestamp, id: id };
       } else {
         return elem;
       }
     });
     await this.escribirArchivo(datosNuevos);
+    return modifiedCount
   }
 
   async deleteById(id) {
     const datosViejos = await this.getArray();
     const datosNuevos = datosViejos.filter((elem) => elem.id != id);
     await this.escribirArchivo(datosNuevos);
+    return datosViejos.length - datosNuevos.length
   }
 
   async deleteAll() {
@@ -82,4 +86,4 @@ class Contenedor {
   }
 }
 
-module.exports = Contenedor;
+module.exports = ContenedorArchivo;
