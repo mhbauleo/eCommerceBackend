@@ -2,11 +2,15 @@ const express = require("express");
 
 const routerProductos = require("./routes/apiProductos");
 const routerCarrito = require("./routes/apiCarrito");
+const routerLogin = require("./routes/login")
 
 const app = express();
 
+app.use(express.static("./public"));
+
 app.use("/api/productos", routerProductos);
 app.use("/api/carrito", routerCarrito);
+app.use("/", routerLogin);
 
 app.get(`*`, (req, res) => {
   res.json({
@@ -35,6 +39,21 @@ app.delete(`*`, (req, res) => {
     descripcion: `ruta ${req.path} método ${req.method} no implementada`,
   });
 });
+
+/*----------------------- Motor de plantillas ----------*/
+const hbs = require("express-handlebars");
+
+app.set("views", "./views");
+app.engine(
+  ".hbs",
+  hbs.engine({
+    defaultLayout: "index",
+    layoutsDir: "./views/layouts",
+    extname: ".hbs",
+  })
+);
+
+app.set("view engine", ".hbs");
 
 //--------------------------------------------------------------------------------
 

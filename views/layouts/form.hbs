@@ -1,0 +1,18 @@
+<div class="container mt-3">
+  <div id="bienvenida" class="jumbotron">
+    <h1>Bienvenido {{nombre}}</h1>
+    <form action="/logout" method="GET">
+      <button class="btn btn-success">Desconectar</button>
+    </form>
+  </div>
+
+  <div class="jumbotron">
+    <h1 style="color: blue">Ingrese productos</h1>
+    <br />
+
+    <h2>Lista de productos</h2>
+    <div class="table-responsive">
+      <table id="vistaProductos" class="table table-dark"></table>
+    </div>
+  </div>
+</div>
