@@ -13,28 +13,7 @@ app.use("/api/productos", routerProductos);
 app.use("/api/carrito", routerCarrito);
 app.use("/", routerLogin);
 
-app.get(`*`, (req, res) => {
-  res.json({
-    error: -2,
-    descripcion: `ruta ${req.path} método ${req.method} no implementada`,
-  });
-});
-
-app.post(`*`, (req, res) => {
-  res.json({
-    error: -2,
-    descripcion: `ruta ${req.path} método ${req.method} no implementada`,
-  });
-});
-
-app.put(`*`, (req, res) => {
-  res.json({
-    error: -2,
-    descripcion: `ruta ${req.path} método ${req.method} no implementada`,
-  });
-});
-
-app.delete(`*`, (req, res) => {
+app.all(`*`, (req, res) => {
   res.json({
     error: -2,
     descripcion: `ruta ${req.path} método ${req.method} no implementada`,
