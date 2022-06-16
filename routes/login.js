@@ -7,6 +7,7 @@ const bcrypt = require("bcrypt");
 const MongoStore = require("connect-mongo");
 const { User } = require("../daos/index");
 const config = require("../config");
+const {errorLogger, warnLogger, logger} = require('../helpers/logger')
 
 const router = express.Router();
 
@@ -51,13 +52,15 @@ passport.use(
           !telefono ||
           !password
         ) {
-          console.log("Datos insuficientes");
+          logger.warn("Datos insuficientes")
+          warnLogger.warn("Datos insuficientes")
           return done(null, false);
         }
         const user = await User.getUserByEmail(email);
         console.log(user);
         if (user) {
-          console.log("usuario existente");
+          logger.warn("Usuario existente")
+          warnLogger.warn("Usuario existente")
           return done(null, false);
         }
 
@@ -72,6 +75,8 @@ passport.use(
 
         return done(null, { _id: await User.save(newUser) });
       } catch (err) {
+        logger.error(err)
+        errorLogger.error(err)
         done(err);
       }
     }
@@ -87,17 +92,18 @@ passport.use(
         const user = await User.getUserByEmail(email);
 
         if (!user) {
-          console.log(`User no found with email ${email}`);
+          logger.info(`User no found with email ${email}`)
           return done(null, false);
         }
 
         if (!isValidPassword(user, password)) {
-          console.log("Invalid password");
+          logger.info("Invalid password")
           return done(null, false);
         }
 
         return done(null, user);
       } catch (err) {
+        errorLogger.error(err)
         done(err);
       }
     }

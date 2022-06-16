@@ -1,4 +1,5 @@
 const express = require("express");
+const { errorLogger } = require('./helpers/logger')
 
 const routerProductos = require("./routes/apiProductos");
 const routerCarrito = require("./routes/apiCarrito");
@@ -63,4 +64,4 @@ const server = app.listen(PORT, () => {
   console.log(`Servidor levantado en el puerto ${server.address().port}`);
 });
 
-server.on("error", (error) => console.log(`hubo un error ${error}`));
+server.on("error", (error) => errorLogger.error(`hubo un error ${error}`));

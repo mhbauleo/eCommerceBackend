@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const config = require('../config')
+const config = require("../config");
+const { errorLogger } = require("../helpers/logger");
 
 mongoose.connect(config.mongo.baseUrl, {
   useNewUrlParser: true,
@@ -18,7 +19,7 @@ class ContenedorMongoDb {
       const { _id } = await this.collection.create(objeto);
       return _id.toString();
     } catch (e) {
-      console.log(e);
+      errorLogger.error(e);
     }
   }
 
@@ -27,7 +28,7 @@ class ContenedorMongoDb {
     try {
       return await this.collection.findById(idBuscado);
     } catch (e) {
-      console.log(e);
+      errorLogger.error(e);
     }
   }
 
@@ -35,7 +36,7 @@ class ContenedorMongoDb {
     try {
       return await this.collection.find({});
     } catch (e) {
-      console.log(e);
+      errorLogger.error(e);
     }
   }
 
@@ -47,7 +48,7 @@ class ContenedorMongoDb {
       );
       return modifiedCount;
     } catch (e) {
-      console.log(e);
+      errorLogger.error(e);
     }
   }
 
@@ -58,7 +59,7 @@ class ContenedorMongoDb {
       });
       return deletedCount;
     } catch (e) {
-      console.log(e);
+      errorLogger.error(e);
     }
   }
 
@@ -66,9 +67,9 @@ class ContenedorMongoDb {
     try {
       await this.collection.deleteMany({});
     } catch (e) {
-      console.log(e);
+      errorLogger.error(e);
     }
   }
 }
 
-module.exports = ContenedorMongoDb
+module.exports = ContenedorMongoDb;

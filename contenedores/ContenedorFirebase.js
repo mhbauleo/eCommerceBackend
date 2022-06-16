@@ -1,5 +1,6 @@
 const admin = require("firebase-admin");
 const config = require("../config");
+const { errorLogger } = require("../helpers/logger");
 
 admin.initializeApp({
   credential: admin.credential.cert(config.firebase.serviceAccount),
@@ -20,7 +21,7 @@ class ContenedorFirebase {
       const newElement = await this.collection.add({...objeto, timestamp : newTimestamp});
       return newElement.id;
     } catch (e) {
-      console.log(e);
+      errorLogger.error(e);
     }
   }
 
@@ -32,7 +33,7 @@ class ContenedorFirebase {
       const response = item.data();
       return response == undefined ? null : response;
     } catch (e) {
-      console.log(e);
+      errorLogger.error(e);
     }
   }
 
@@ -43,7 +44,7 @@ class ContenedorFirebase {
       const res = docs.map((doc) => doc.data());
       return res;
     } catch (e) {
-      console.log(e);
+      errorLogger.error(e);
     }
   }
 
@@ -54,7 +55,7 @@ class ContenedorFirebase {
       await doc.update({...newObject , timestamp : newTimestamp});
       return 1;
     } catch (e) {
-      console.log(e);
+      errorLogger.error(e);
       return 0;
     }
   }
@@ -69,7 +70,7 @@ class ContenedorFirebase {
         return 0;
       }
     } catch (e) {
-      console.log(e);
+      errorLogger.error(e);
     }
   }
 }

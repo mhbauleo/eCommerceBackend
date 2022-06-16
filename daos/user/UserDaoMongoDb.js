@@ -1,6 +1,6 @@
 const ContenedorMongoDb = require('../../contenedores/ContenedorMongoDb')
-const userEsquema = require ('../../models/user')
-const bcrypt = require("bcrypt");
+const userEsquema = require('../../models/user')
+const {errorLogger} = require('../../helpers/logger')
 
 class UserDaoMongoDb extends ContenedorMongoDb {
     constructor() {
@@ -11,7 +11,7 @@ class UserDaoMongoDb extends ContenedorMongoDb {
         try {
             return await this.collection.findOne({email : email})
         } catch (err) {
-            console.log(err)            
+            errorLogger.error(err);           
         }
     }
 }
