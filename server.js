@@ -1,4 +1,5 @@
 const express = require("express");
+require('dotenv').config()
 const { errorLogger, logger } = require('./helpers/logger')
 
 const routerProductos = require("./routes/apiProductos");

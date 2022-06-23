@@ -7,6 +7,10 @@ const config = {
     },
     firebase: {
         serviceAccount : require("./DB/Firebase/ecommerce-f8d35-firebase-adminsdk-j9gwx-1089a065e0.json")
+    },
+    gmail: {
+        password: process.env.GMAIL_PASS
     }
+
 }
 module.exports = config

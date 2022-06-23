@@ -8,6 +8,7 @@ const MongoStore = require("connect-mongo");
 const { User } = require("../daos/index");
 const config = require("../config");
 const {errorLogger, warnLogger, logger} = require('../helpers/logger')
+const {sendEmail} = require('../helpers/mail')
 
 const router = express.Router();
 
@@ -57,7 +58,7 @@ passport.use(
           return done(null, false);
         }
         const user = await User.getUserByEmail(email);
-        console.log(user);
+
         if (user) {
           logger.warn("Usuario existente")
           warnLogger.warn("Usuario existente")
@@ -72,8 +73,7 @@ passport.use(
           telefono,
           password: createHash(password),
         };
-
-        return done(null, { _id: await User.save(newUser) });
+        return done(null, await User.saveAndGetUser(newUser));
       } catch (err) {
         logger.error(err)
         errorLogger.error(err)
@@ -130,6 +130,14 @@ router.post(
     failureRedirect: "/register-error",
   }),
   (req, res) => {
+    const { nombre, email, direccion, edad, telefono, _id } = req.user
+    sendEmail('Nuevo registro', 
+    `<h2>Nombre: </h2><p>${ nombre }</p>
+    <h2>Email: </h2><p>${ email }</p>
+    <h2>Direccion: </h2><p>${ direccion }</p>
+    <h2>Edad: </h2><p>${ edad }</p>
+    <h2>Telefono: </h2><p>${ telefono }</p>
+    <h2>Id: </h2><p>${ _id }</p>`)
     req.logOut((err) => {
       res.redirect("/login");
     });
