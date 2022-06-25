@@ -9,6 +9,7 @@ const { User } = require("../daos/index");
 const config = require("../config");
 const {errorLogger, warnLogger, logger} = require('../helpers/logger')
 const {sendEmail} = require('../helpers/mail')
+const {carrito} = require('../daos/index')
 
 const router = express.Router();
 
@@ -25,7 +26,7 @@ router.use(
     store: MongoStore.create({
       mongoUrl: config.mongo.baseUrl,
       mongoOptions: advancedOptions,
-      ttl: 60,
+      ttl: 600,
     }),
     secret: "secreto",
     resave: true,
@@ -72,6 +73,7 @@ passport.use(
           edad,
           telefono,
           password: createHash(password),
+          idCarrito: await carrito.crear()
         };
         return done(null, await User.saveAndGetUser(newUser));
       } catch (err) {
@@ -150,9 +152,34 @@ router.get("/register-error", (req, res) => {
 
 router.get("/login", (req, res) => {
   if (req.isAuthenticated()) {
-    res.render("layouts/form", {nombre: req.user?.nombre});
+    res.cookie("idCarrito", req.user?.idCarrito).render("layouts/form", {nombre: req.user?.nombre});
   } else {
     res.render("layouts/login");
+  }
+});
+
+router.get("/productos", (req, res) => {
+  if (req.isAuthenticated()) {
+    res.cookie("idCarrito", req.user?.idCarrito).render("layouts/productos", {nombre: req.user?.nombre});
+  } else {
+    res.redirect("/login");
+  }
+});
+
+router.get("/user", (req, res) => {
+  if (req.isAuthenticated()) {
+    const { nombre, email, edad, direccion, telefono} = req.user
+    res.render("layouts/user", {nombre, email,edad,direccion,telefono});
+  } else {
+    res.redirect("/login");
+  }
+});
+
+router.get("/carrito", (req, res) => {
+  if (req.isAuthenticated()) {
+    res.cookie("idCarrito", req.user?.idCarrito).render("layouts/cart", {nombre: req.user?.nombre});
+  } else {
+    res.redirect("/login");
   }
 });
 
@@ -162,7 +189,7 @@ router.post(
     failureRedirect: "/login-error",
   }),
   (req, res) => {
-    res.render("layouts/form", {nombre: req.user?.nombre});
+    res.cookie("idCarrito", req.user?.idCarrito).render("layouts/form", {nombre: req.user?.nombre});
   }
 );
 

@@ -1,0 +1,98 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/login">Home </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/productos">Productos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/user">Usuario <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/carrito">Carrito</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container mt-3">
+  <h1 class="title">Perfil de usuario</h1>
+
+<form id='formUpdateProfile'>
+    <div class="columns">
+        <div class="column is-half">
+            <div class="field">
+                <label for="name" class="label">Nombre</label>
+                <div class="control">
+                    <input name="name" type="text" class="input" value={{nombre}} disabled>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="columns">
+        <div class="column">
+            <div class="field">
+                <label for="email" class="label">Email</label>
+                <div class="control">
+                    <input name="email" type="email" class="input" value={{email}} disabled>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="field">
+                <label for="age" class="label">Edad</label>
+                <div class="control">
+                    <input name="age" type="number" class="input" value={{edad}} disabled>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    <div class="columns">
+        <div class="column">
+            <div class="field">
+                <label for="adress" class="label">Dirección</label>
+                <div class="control">
+                    <input name="adress" type="text" class="input" value="{{direccion}}" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="field">
+                <label for="hone" class="label">Teléfono</label>
+                <div class="control">
+                    <input name="phone" type="tel" class="input" value={{telefono}} disabled>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <div class="columns">
+        <div class="column is-one-third">
+            <div class="field">
+                <label for="avatar" class="label">Foto de perfil</label>
+                <div class="control">
+                    <input name="avatar" type="file" class="input">
+                </div>
+            </div>
+            <p id="isCorrect"></p>
+        </div>
+    </div>
+
+    <div class="columns">
+       <div class="column">
+           <div class="control">
+               <input type="submit" value="Actualizar" class="button is-primary">
+           </div>
+       </div>
+    </div>
+  
+</form>
+</div>

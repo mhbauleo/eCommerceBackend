@@ -6,8 +6,9 @@ const userEsquema = new mongoose.Schema(
         email: {type: String, require: true},
         direccion: {type: String, require: true},
         edad: {type: Number, require: true},
-        telefono: {type: Number, require: true},
-        password: {type: String, require: true}
+        telefono: {type: String, require: true},
+        password: {type: String, require: true},
+        idCarrito: {type: String, require: true}
     },
     { timestamps: true }
   );

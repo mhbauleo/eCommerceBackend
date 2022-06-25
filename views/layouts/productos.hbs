@@ -7,10 +7,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/login">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/login">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/productos">Productos</a>
+        <a class="nav-link" href="/productos">Productos <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/user">Usuario</a>
@@ -22,10 +22,12 @@
   </div>
 </nav>
 <div class="container mt-3">
-  <div id="bienvenida" class="jumbotron">
-    <h1>Bienvenido {{nombre}}</h1>
-    <form action="/logout" method="GET">
-      <button class="btn btn-success">Desconectar</button>
-    </form>
+  <div class="jumbotron">
+    <h2>Lista de productos</h2>
+    <div class="table-responsive">
+      <table id="vistaProductos" class="table table-dark"></table>
+    </div>
   </div>
 </div>
+
+<script src="js/showProducts.js"></script>
