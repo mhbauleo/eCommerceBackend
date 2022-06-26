@@ -8,7 +8,8 @@ const userEsquema = new mongoose.Schema(
         edad: {type: Number, require: true},
         telefono: {type: String, require: true},
         password: {type: String, require: true},
-        idCarrito: {type: String, require: true}
+        idCarrito: {type: String, require: true},
+        avatar: {type: String, require: true}
     },
     { timestamps: true }
   );

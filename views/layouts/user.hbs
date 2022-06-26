@@ -24,13 +24,13 @@
 <div class="container mt-3">
   <h1 class="title">Perfil de usuario</h1>
 
-<form id='formUpdateProfile'>
+<form action="/update" enctype="multipart/form-data" method="POST">
     <div class="columns">
         <div class="column is-half">
             <div class="field">
-                <label for="name" class="label">Nombre</label>
+                <label for="nombre" class="label">Nombre</label>
                 <div class="control">
-                    <input name="name" type="text" class="input" value={{nombre}} disabled>
+                    <input name="nombre" type="text" class="input" value={{nombre}} disabled>
                 </div>
             </div>
         </div>
@@ -47,9 +47,9 @@
         </div>
         <div class="column">
             <div class="field">
-                <label for="age" class="label">Edad</label>
+                <label for="edad" class="label">Edad</label>
                 <div class="control">
-                    <input name="age" type="number" class="input" value={{edad}} disabled>
+                    <input name="edad" type="number" class="input" value={{edad}} disabled>
                 </div>
             </div>
         </div>
@@ -58,17 +58,17 @@
     <div class="columns">
         <div class="column">
             <div class="field">
-                <label for="adress" class="label">Dirección</label>
+                <label for="direccion" class="label">Dirección</label>
                 <div class="control">
-                    <input name="adress" type="text" class="input" value="{{direccion}}" disabled>
+                    <input name="direccion" type="text" class="input" value="{{direccion}}" disabled>
                 </div>
             </div>
         </div>
         <div class="column">
             <div class="field">
-                <label for="hone" class="label">Teléfono</label>
+                <label for="telefono" class="label">Teléfono</label>
                 <div class="control">
-                    <input name="phone" type="tel" class="input" value={{telefono}} disabled>
+                    <input name="telefono" type="tel" class="input" value={{telefono}} disabled>
                 </div>
             </div>
         </div>
@@ -95,4 +95,6 @@
     </div>
   
 </form>
+
+<a href="/avatar/{{avatar}}">Foto de perfil</a>
 </div>

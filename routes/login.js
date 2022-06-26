@@ -10,6 +10,8 @@ const config = require("../config");
 const {errorLogger, warnLogger, logger} = require('../helpers/logger')
 const {sendEmail} = require('../helpers/mail')
 const {carrito} = require('../daos/index')
+const {upload} = require('../middlewares/avatar')
+const {updateAvatar} = require('../middlewares/update-image')
 
 const router = express.Router();
 
@@ -73,7 +75,8 @@ passport.use(
           edad,
           telefono,
           password: createHash(password),
-          idCarrito: await carrito.crear()
+          idCarrito: await carrito.crear(),
+          avatar: 'avatar.jpg'
         };
         return done(null, await User.saveAndGetUser(newUser));
       } catch (err) {
@@ -168,8 +171,8 @@ router.get("/productos", (req, res) => {
 
 router.get("/user", (req, res) => {
   if (req.isAuthenticated()) {
-    const { nombre, email, edad, direccion, telefono} = req.user
-    res.render("layouts/user", {nombre, email,edad,direccion,telefono});
+    const { nombre, email, edad, direccion, telefono, avatar} = req.user
+    res.render("layouts/user", {nombre, email, edad, direccion, telefono, avatar});
   } else {
     res.redirect("/login");
   }
@@ -192,6 +195,14 @@ router.post(
     res.cookie("idCarrito", req.user?.idCarrito).render("layouts/form", {nombre: req.user?.nombre});
   }
 );
+
+router.post("/update", upload.single('avatar'), updateAvatar, async (req, res) => {
+  req.logIn(await User.getById(req.user._id), (err) => {
+    if (!err) {
+      res.redirect('/user')
+    }
+  })
+})
 
 router.get("/login-error", (req, res) => {
   res.render("layouts/login-error");
