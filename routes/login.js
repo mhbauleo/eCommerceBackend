@@ -11,8 +11,8 @@ const {errorLogger, warnLogger, logger} = require('../helpers/logger')
 const {sendEmail} = require('../helpers/mail')
 const {carrito} = require('../daos/index')
 
-const {upload} = require('../middlewares/avatar')
-const {updateAvatar} = require('../middlewares/update-image')
+const {upload} = require('../middlewares/multer')
+const {updateAvatar, checkImage} = require('../middlewares/avatar')
 const {enviarInfoAlAdmin,enviarMensajeAUsuario} = require('../middlewares/mensajes')
 
 const { comprar, mostrarVistaCarrito } = require('../controllers/carrito')
@@ -196,7 +196,7 @@ router.post(
   }
 );
 
-router.post("/update", upload.single('avatar'), updateAvatar, async (req, res) => {
+router.post("/update", upload.single('avatar'), checkImage, updateAvatar, async (req, res) => {
   req.logIn(await User.getById(req.user._id), (err) => {
     if (!err) {
       res.redirect('/user')

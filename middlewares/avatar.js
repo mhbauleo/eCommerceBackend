@@ -1,16 +1,18 @@
-const multer = require("multer");
+const { User } = require('../daos/index')
+const {warnLogger} = require('../helpers/logger')
 
-let storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    callback(null, "public/avatar");
-  },
-  filename: (req, file, callback) => {
-    const originalNameSplited = file.originalname.split('.')
-    const ext = originalNameSplited[originalNameSplited.length - 1]
-    const newAvatar= `${req.user._id}.${ext}`
-    callback(null, newAvatar);
-  },
-});
-const upload = multer({ storage: storage });
+const updateAvatar = async (req, res, next) => {
+    const count = await User.updateAvatar(req.file?.filename, req.user._id)
+    next()
+}
 
-module.exports = {upload}
+const checkImage = async (req, res ,next) => {
+    if(!req.file) {
+        warnLogger.warn("No se adjunto ninguna imagen")
+        res.redirect('/user')
+    } else {
+        next()
+    }
+}
+
+module.exports = {updateAvatar, checkImage}
