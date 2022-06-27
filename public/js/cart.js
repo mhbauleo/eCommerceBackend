@@ -2,17 +2,32 @@
 /*=                 CART                  =*/
 /*=========================================*/
 
+let productos;
+
 (async function () {
   const idCarrito = getCookie("idCarrito");
   console.log(idCarrito);
 
   await renderCarrito(idCarrito);
+
+  document.getElementById("comprar").addEventListener("click", (event) => {
+    console.log(productos);
+    const payload = { productos };
+    console.log(payload);
+    fetch("/carrito/comprar", {
+      method: "POST",
+      body: JSON.stringify(productos),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+  });
 })();
 
 async function renderCarrito(idCarrito) {
   const cartList = document.querySelector("#cartList");
   const response = await fetch(`/api/carrito/${idCarrito}/productos`);
-  const productos = await response.json();
+  productos = await response.json();
 
   const htmlList = productos.map((producto) => {
     return `<tr id="${producto._id}" class="cartProduct">
@@ -42,18 +57,18 @@ async function renderCarrito(idCarrito) {
 }
 
 function getCookie(cookie_name) {
-    let c_name = cookie_name + "=";
-    let cookie_decoded = decodeURIComponent(document.cookie);
-    let cookie_parts = cookie_decoded.split(';');
-    
-    for(let i = 0; i <cookie_parts.length; i++) {
-        let c = cookie_parts[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(c_name) == 0) {
-            return c.substring(c_name.length, c.length);
-        }
+  let c_name = cookie_name + "=";
+  let cookie_decoded = decodeURIComponent(document.cookie);
+  let cookie_parts = cookie_decoded.split(";");
+
+  for (let i = 0; i < cookie_parts.length; i++) {
+    let c = cookie_parts[i];
+    while (c.charAt(0) == " ") {
+      c = c.substring(1);
     }
-    return "";
+    if (c.indexOf(c_name) == 0) {
+      return c.substring(c_name.length, c.length);
+    }
+  }
+  return "";
 }

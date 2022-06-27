@@ -10,8 +10,12 @@ const config = require("../config");
 const {errorLogger, warnLogger, logger} = require('../helpers/logger')
 const {sendEmail} = require('../helpers/mail')
 const {carrito} = require('../daos/index')
+
 const {upload} = require('../middlewares/avatar')
 const {updateAvatar} = require('../middlewares/update-image')
+const {enviarInfoAlAdmin,enviarMensajeAUsuario} = require('../middlewares/mensajes')
+
+const { comprar, mostrarVistaCarrito } = require('../controllers/carrito')
 
 const router = express.Router();
 
@@ -178,13 +182,9 @@ router.get("/user", (req, res) => {
   }
 });
 
-router.get("/carrito", (req, res) => {
-  if (req.isAuthenticated()) {
-    res.cookie("idCarrito", req.user?.idCarrito).render("layouts/cart", {nombre: req.user?.nombre});
-  } else {
-    res.redirect("/login");
-  }
-});
+
+router.post('/carrito/comprar', enviarInfoAlAdmin, enviarMensajeAUsuario, comprar)
+router.get("/carrito", mostrarVistaCarrito);
 
 router.post(
   "/login",

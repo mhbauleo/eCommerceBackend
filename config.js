@@ -10,6 +10,10 @@ const config = {
     },
     gmail: {
         password: process.env.GMAIL_PASS
+    },
+    twilio: {
+        SID: process.env.ACCOUNT_SID_TWILIO,
+        TOKEN: process.env.AUTH_TOKEN_TWILIO
     }
 
 }
