@@ -42,7 +42,7 @@ const cluster = require('cluster')
 const numCPUs = require('os').cpus().length
 const MODO = process.argv[2] || 'FORK'
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 const modoCluster = MODO == "CLUSTER";
 
