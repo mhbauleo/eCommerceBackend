@@ -5,17 +5,35 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 const MongoStore = require("connect-mongo");
-const { User } = require("../daos/index");
+const { User, carrito } = require("../daos/index");
 const config = require("../config");
-const {errorLogger, warnLogger, logger} = require('../helpers/logger')
-const {sendEmail} = require('../helpers/mail')
-const {carrito} = require('../daos/index')
+const { errorLogger, warnLogger, logger } = require("../helpers/logger");;
 
-const {upload} = require('../middlewares/multer')
-const {updateAvatar, checkImage} = require('../middlewares/avatar')
-const {enviarInfoAlAdmin,enviarMensajeAUsuario} = require('../middlewares/mensajes')
+const { upload } = require("../middlewares/multer");
+const { updateAvatar, checkImage } = require("../middlewares/avatar");
+const {
+  notificarNuevoUsuario,
+  enviarInfoAlAdmin,
+  enviarMensajeAUsuario,
+} = require("../middlewares/mensajes");
 
-const { comprar, mostrarVistaCarrito } = require('../controllers/carrito')
+const { comprar } = require("../controllers/carrito");
+const {
+  mostrarVistaHome,
+  mostrarVistaProductos,
+  mostrarVistaUser,
+  mostrarVistaCarrito,
+} = require("../controllers/vistas");
+const {
+  mostrarVistaLogin,
+  mostrarVistaLoginError,
+  mostrarVistaRegister,
+  mostrarVistaRegisterError,
+  mostrarVistaLogout,
+  registrarNuevoUsuario,
+  iniciarSesion,
+  actualizarUsuario,
+} = require("../controllers/login");
 
 const router = express.Router();
 
@@ -60,15 +78,15 @@ passport.use(
           !telefono ||
           !password
         ) {
-          logger.warn("Datos insuficientes")
-          warnLogger.warn("Datos insuficientes")
+          logger.warn("Datos insuficientes");
+          warnLogger.warn("Datos insuficientes");
           return done(null, false);
         }
         const user = await User.getUserByEmail(email);
 
         if (user) {
-          logger.warn("Usuario existente")
-          warnLogger.warn("Usuario existente")
+          logger.warn("Usuario existente");
+          warnLogger.warn("Usuario existente");
           return done(null, false);
         }
 
@@ -80,12 +98,12 @@ passport.use(
           telefono,
           password: createHash(password),
           idCarrito: await carrito.crear(),
-          avatar: 'avatar.jpg'
+          avatar: "avatar.jpg",
         };
         return done(null, await User.saveAndGetUser(newUser));
       } catch (err) {
-        logger.error(err)
-        errorLogger.error(err)
+        logger.error(err);
+        errorLogger.error(err);
         done(err);
       }
     }
@@ -101,18 +119,18 @@ passport.use(
         const user = await User.getUserByEmail(email);
 
         if (!user) {
-          logger.info(`User no found with email ${email}`)
+          logger.info(`User no found with email ${email}`);
           return done(null, false);
         }
 
         if (!isValidPassword(user, password)) {
-          logger.info("Invalid password")
+          logger.info("Invalid password");
           return done(null, false);
         }
 
         return done(null, user);
       } catch (err) {
-        errorLogger.error(err)
+        errorLogger.error(err);
         done(err);
       }
     }
@@ -129,93 +147,48 @@ passport.deserializeUser(async (id, done) => {
 
 /*----------------------- Rutas -----------------------*/
 
-router.get("/register", (req, res) => {
-  res.render("layouts/register");
-});
+router.get("/register", mostrarVistaRegister);
+router.get("/register-error", mostrarVistaRegisterError);
+router.get("/login", mostrarVistaLogin);
+router.get("/login-error", mostrarVistaLoginError);
+router.get("/logout", mostrarVistaLogout);
 
 router.post(
   "/register",
   passport.authenticate("register", {
     failureRedirect: "/register-error",
   }),
-  (req, res) => {
-    const { nombre, email, direccion, edad, telefono, _id } = req.user
-    sendEmail('Nuevo registro', 
-    `<h2>Nombre: </h2><p>${ nombre }</p>
-    <h2>Email: </h2><p>${ email }</p>
-    <h2>Direccion: </h2><p>${ direccion }</p>
-    <h2>Edad: </h2><p>${ edad }</p>
-    <h2>Telefono: </h2><p>${ telefono }</p>
-    <h2>Id: </h2><p>${ _id }</p>`)
-    req.logOut((err) => {
-      res.redirect("/login");
-    });
-  }
+  notificarNuevoUsuario,
+  registrarNuevoUsuario
 );
-
-router.get("/register-error", (req, res) => {
-  res.render("layouts/register-error");
-});
-
-router.get("/login", (req, res) => {
-  if (req.isAuthenticated()) {
-    res.cookie("idCarrito", req.user?.idCarrito).render("layouts/form", {nombre: req.user?.nombre});
-  } else {
-    res.render("layouts/login");
-  }
-});
-
-router.get("/productos", (req, res) => {
-  if (req.isAuthenticated()) {
-    res.cookie("idCarrito", req.user?.idCarrito).render("layouts/productos", {nombre: req.user?.nombre});
-  } else {
-    res.redirect("/login");
-  }
-});
-
-router.get("/user", (req, res) => {
-  if (req.isAuthenticated()) {
-    const { nombre, email, edad, direccion, telefono, avatar} = req.user
-    res.render("layouts/user", {nombre, email, edad, direccion, telefono, avatar});
-  } else {
-    res.redirect("/login");
-  }
-});
-
-
-router.post('/carrito/comprar', enviarInfoAlAdmin, enviarMensajeAUsuario, comprar)
-router.get("/carrito", mostrarVistaCarrito);
 
 router.post(
   "/login",
   passport.authenticate("login", {
     failureRedirect: "/login-error",
   }),
-  (req, res) => {
-    res.cookie("idCarrito", req.user?.idCarrito).render("layouts/form", {nombre: req.user?.nombre});
-  }
+  iniciarSesion
 );
 
-router.post("/update", upload.single('avatar'), checkImage, updateAvatar, async (req, res) => {
-  req.logIn(await User.getById(req.user._id), (err) => {
-    if (!err) {
-      res.redirect('/user')
-    }
-  })
-})
+router.get("/home", mostrarVistaHome);
+router.get("/productos", mostrarVistaProductos);
+router.get("/user", mostrarVistaUser);
+router.get("/carrito", mostrarVistaCarrito);
 
-router.get("/login-error", (req, res) => {
-  res.render("layouts/login-error");
-});
+router.post(
+  "/carrito/comprar",
+  enviarInfoAlAdmin,
+  enviarMensajeAUsuario,
+  comprar
+);
 
-router.get("/logout", (req, res) => {
-  let nombre = req.user?.nombre;
-  console.log(`antes: ${JSON.stringify(req.user)}`);
-  req.logOut((err) => {
-    console.log(`despues: ${req.user}`);
-    res.render("layouts/logout", { nombre });
-  });
-});
+router.post(
+  "/update",
+  upload.single("avatar"),
+  checkImage,
+  updateAvatar,
+  actualizarUsuario
+);
 
 /*----------------------- Aux -----------------------*/
 

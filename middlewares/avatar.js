@@ -2,7 +2,7 @@ const { User } = require('../daos/index')
 const {warnLogger} = require('../helpers/logger')
 
 const updateAvatar = async (req, res, next) => {
-    const count = await User.updateAvatar(req.file?.filename, req.user._id)
+    await User.updateAvatar(req.file?.filename, req.user._id)
     next()
 }
 
