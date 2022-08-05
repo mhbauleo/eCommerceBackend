@@ -1,18 +1,14 @@
 const express = require("express");
 require('dotenv').config()
-const { errorLogger, logger } = require('./helpers/logger')
+const { errorLogger } = require('./helpers/logger')
 
-const routerProductos = require("./routes/apiProductos");
-const routerCarrito = require("./routes/apiCarrito");
-const routerLogin = require("./routes/login")
+const routerMain = require('./routes/main')
 
 const app = express();
 
 app.use(express.static("./public"));
 
-app.use("/api/productos", routerProductos);
-app.use("/api/carrito", routerCarrito);
-app.use("/", routerLogin);
+app.use("/", routerMain);
 
 app.all(`*`, (req, res) => {
   res.json({

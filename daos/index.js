@@ -18,12 +18,6 @@ switch (persistencia) {
         carrito = new CarritosDaoMongoDb()
         User = new UserDaoMongoDb()
         break;
-    case "firebase":
-        const ProductosDaoFirebase = require("./productos/ProductosDaoFirebase");
-        const CarritosFirebase = require("./carritos/CarritosDaoFirebase")
-        productos = new ProductosDaoFirebase()
-        carrito = new CarritosFirebase()
-        break;
     default:
 }
 
