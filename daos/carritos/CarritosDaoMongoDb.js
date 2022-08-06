@@ -1,6 +1,6 @@
 const ContenedorMongoDb = require("../../contenedores/ContenedorMongoDb");
 const ProductosDaoMongoDb = require("../productos/ProductosDaoMongoDb");
-const carritoEsquema = require("../../models/carrito");
+const carritoEsquema = require("../../schemas/carrito");
 const {deleteCarritoAux, getProductosAux, postProductoAux} = require('../../functions/carritos')
 
 class CarritosDaoMongoDb extends ContenedorMongoDb {

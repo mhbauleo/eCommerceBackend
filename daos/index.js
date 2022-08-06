@@ -1,24 +1,11 @@
-let productos
-let carrito
-let User
-let persistencia = "mongo"
+let persistencia = "MONGO"
 
-switch (persistencia) {
-    case "fileSystem":
-        const ProductosDaoArchivo = require("./productos/ProductosDaoArchivo");
-        const CarritosDaoArchivo = require("./carritos/CarritosDaoArchivo")
-        productos = new ProductosDaoArchivo()
-        carrito = new CarritosDaoArchivo()
-        break;
-    case "mongo":
-        const ProductosDaoMongoDb = require("./productos/ProductosDaoMongoDb");
-        const CarritosDaoMongoDb = require("./carritos/CarritosDaoMongoDb")
-        const UserDaoMongoDb = require("./user/UserDaoMongoDb")
-        productos = new ProductosDaoMongoDb()
-        carrito = new CarritosDaoMongoDb()
-        User = new UserDaoMongoDb()
-        break;
-    default:
-}
+const ProductosFactoryDao = require("./productos/ProductosFactory");
+const UserFactoryDao = require("./user/UserFactory");
+const CarritosFactoryDao = require("./carritos/CarritosFactory");
 
-module.exports = {productos, carrito, User, persistencia}
+const productos = ProductosFactoryDao.get(persistencia);
+const carrito = CarritosFactoryDao.get(persistencia);
+const User = UserFactoryDao.get(persistencia);
+
+module.exports = { productos, carrito, User }

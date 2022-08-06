@@ -1,5 +1,5 @@
 const ContenedorMongoDb = require("../../contenedores/ContenedorMongoDb");
-const userEsquema = require("../../models/user");
+const userEsquema = require("../../schemas/user");
 const mongoose = require("mongoose");
 const { errorLogger } = require("../../helpers/logger");
 
