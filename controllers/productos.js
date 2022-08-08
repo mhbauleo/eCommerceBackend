@@ -4,6 +4,10 @@ const getAllProducts = async (req, res) => {
   res.json({ status: 'Success', message: 'Elements found', payload: await productos.getAll()});
 };
 
+const getProductsByCategory = async (req, res) => {
+  res.json({ status: 'Success', message: 'Elements found', payload: await productos.getProductsByCategory(req.params.categoria)});
+}
+
 const getProductById = async (req, res) => {
   const producto = await productos.getById(req.params.id);
   if (producto != null) {
@@ -38,4 +42,4 @@ const deleteProduct = async (req, res) => {
   }
 };
 
-module.exports = { getAllProducts, getProductById, saveProduct, updateProduct, deleteProduct }
+module.exports = { getAllProducts, getProductsByCategory, getProductById, saveProduct, updateProduct, deleteProduct }
