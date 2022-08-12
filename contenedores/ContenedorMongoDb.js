@@ -8,12 +8,13 @@ mongoose.connect(config.mongo.baseUrl, {
 });
 
 class ContenedorMongoDb {
-  constructor(collection, schema) {
-    this.collection = mongoose.model(collection, schema);
+  constructor(model) {
+    this.collection = model;
   }
 
   // Principales
 
+  /* Devuelve  si el objeto es invalido*/ 
   async save(objeto) {
     try {
       const { _id } = await this.collection.create(objeto);
