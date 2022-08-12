@@ -2,43 +2,25 @@ const express = require("express");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-const bcrypt = require("bcrypt");
 const MongoStore = require("connect-mongo");
-const { User, carrito } = require("../daos/index");
 const config = require("../config");
-const { errorLogger, warnLogger, logger } = require("../helpers/logger");;
+const { initializePassport } = require("../passport-config")
 
-const { upload } = require("../middlewares/multer");
-const { updateAvatar, checkImage } = require("../middlewares/avatar");
 const {
-  notificarNuevoUsuario,
-  enviarInfoAlAdmin,
-  enviarMensajeAUsuario,
+  notificarNuevoUsuario
 } = require("../middlewares/mensajes");
+const { passportCall } = require('../middlewares/passport')
+const { userJoiValidator } = require('../middlewares/validators')
 
-const { comprar } = require("../controllers/carrito");
-const {
-  mostrarVistaHome,
-  mostrarVistaProductos,
-  mostrarVistaUser,
-  mostrarVistaCarrito,
-} = require("../controllers/vistas");
 const {
   mostrarVistaLogin,
-  mostrarVistaLoginError,
   mostrarVistaRegister,
-  mostrarVistaRegisterError,
-  mostrarVistaLogout,
-  registrarNuevoUsuario,
-  iniciarSesion,
-  actualizarUsuario,
+  register,
+  login
 } = require("../controllers/login");
+const {mostrarVistaChat, mostrarVistaChatEmail} = require("../controllers/chat")
 
 const router = express.Router();
-
-router.use(express.json());
-router.use(express.urlencoded({ extended: true }));
 
 /*----------------------- Session -----------------------*/
 
@@ -57,147 +39,31 @@ router.use(
     saveUninitialized: true,
   })
 );
-
-/*----------------------- Passport -----------------------*/
-
 router.use(passport.initialize());
 router.use(passport.session());
 
-passport.use(
-  "register",
-  new LocalStrategy(
-    { passReqToCallback: true, usernameField: "email" },
-    async (req, email, password, done) => {
-      const { nombre, direccion, edad, telefono } = req.body;
-      try {
-        if (
-          !email ||
-          !nombre ||
-          !direccion ||
-          !edad ||
-          !telefono ||
-          !password
-        ) {
-          logger.warn("Datos insuficientes");
-          warnLogger.warn("Datos insuficientes");
-          return done(null, false);
-        }
-        const user = await User.getUserByEmail(email);
-
-        if (user) {
-          logger.warn("Usuario existente");
-          warnLogger.warn("Usuario existente");
-          return done(null, false);
-        }
-
-        const newUser = {
-          nombre,
-          email,
-          direccion,
-          edad,
-          telefono,
-          password: createHash(password),
-          idCarrito: await carrito.crear(),
-          avatar: "avatar.jpg",
-        };
-        return done(null, await User.saveAndGetUser(newUser));
-      } catch (err) {
-        logger.error(err);
-        errorLogger.error(err);
-        done(err);
-      }
-    }
-  )
-);
-
-passport.use(
-  "login",
-  new LocalStrategy(
-    { usernameField: "email" },
-    async (email, password, done) => {
-      try {
-        const user = await User.getUserByEmail(email);
-
-        if (!user) {
-          logger.info(`User no found with email ${email}`);
-          return done(null, false);
-        }
-
-        if (!isValidPassword(user, password)) {
-          logger.info("Invalid password");
-          return done(null, false);
-        }
-
-        return done(null, user);
-      } catch (err) {
-        errorLogger.error(err);
-        done(err);
-      }
-    }
-  )
-);
-
-passport.serializeUser((user, done) => {
-  done(null, user._id);
-});
-
-passport.deserializeUser(async (id, done) => {
-  done(null, await User.getById(id));
-});
+initializePassport()
 
 /*----------------------- Rutas -----------------------*/
 
 router.get("/register", mostrarVistaRegister);
-router.get("/register-error", mostrarVistaRegisterError);
 router.get("/login", mostrarVistaLogin);
-router.get("/login-error", mostrarVistaLoginError);
-router.get("/logout", mostrarVistaLogout);
 
 router.post(
   "/register",
-  passport.authenticate("register", {
-    failureRedirect: "/register-error",
-  }),
+  userJoiValidator,
+  passportCall('register'),
   notificarNuevoUsuario,
-  registrarNuevoUsuario
+  register
 );
 
 router.post(
   "/login",
-  passport.authenticate("login", {
-    failureRedirect: "/login-error",
-  }),
-  iniciarSesion
+  passportCall('login'),
+  login
 );
 
-router.get("/home", mostrarVistaHome);
-router.get("/productos", mostrarVistaProductos);
-router.get("/user", mostrarVistaUser);
-router.get("/carrito", mostrarVistaCarrito);
-
-router.post(
-  "/carrito/comprar",
-  enviarInfoAlAdmin,
-  enviarMensajeAUsuario,
-  comprar
-);
-
-router.post(
-  "/update",
-  upload.single("avatar"),
-  checkImage,
-  updateAvatar,
-  actualizarUsuario
-);
-
-/*----------------------- Aux -----------------------*/
-
-function createHash(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
-}
-
-function isValidPassword(user, password) {
-  return bcrypt.compareSync(password, user.password);
-}
+router.get("/chat",  mostrarVistaChat)
+router.get("/chat/:email",  mostrarVistaChatEmail)
 
 module.exports = router;

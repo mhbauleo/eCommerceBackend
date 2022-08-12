@@ -1,9 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-router.use(express.json());
-router.use(express.urlencoded({ extended: true }));
-
 const { createNewCart, deleteCart, getProducts, addProductToCart, deleteProductCart } = require('../controllers/carrito')
 
 router.post("/", createNewCart)

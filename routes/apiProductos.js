@@ -1,17 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-router.use(express.json());
-router.use(express.urlencoded({ extended: true }));
-
 const { getAllProducts, getProductsByCategory, getProductById, saveProduct, updateProduct, deleteProduct } = require('../controllers/productos')
-const { confirmarPermisos } = require('../middlewares/admin')
+const { auth, verifyAdminRole } = require('../middlewares/auth')
+const { productJoiValidator } = require('../middlewares/validators')
 
 router.get("/", getAllProducts);
-router.get("/:categoria", getProductsByCategory)
 router.get("/:id", getProductById);
-router.post("/", confirmarPermisos, saveProduct);
-router.put("/:id", confirmarPermisos, updateProduct);
-router.delete("/:id", confirmarPermisos, deleteProduct);
+router.get("/categoria/:categoria", getProductsByCategory)
+router.post("/", auth, verifyAdminRole, productJoiValidator, saveProduct);
+router.put("/:id", auth, verifyAdminRole, productJoiValidator, updateProduct);
+router.delete("/:id", auth, verifyAdminRole, deleteProduct);
 
 module.exports = router;
