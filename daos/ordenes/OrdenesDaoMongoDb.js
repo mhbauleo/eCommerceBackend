@@ -31,7 +31,6 @@ class OrdenesDaoMongoDb extends ContenedorMongoDb {
         items.push(count[id]);
       }
 
-
       return { nroOrden: await this.save({ items, estado, email }), items };
     } catch (e) {
       console.log(e);

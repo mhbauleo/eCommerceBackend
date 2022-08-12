@@ -18,7 +18,6 @@ const {
   register,
   login
 } = require("../controllers/login");
-const {mostrarVistaChat, mostrarVistaChatEmail} = require("../controllers/chat")
 
 const router = express.Router();
 
@@ -62,8 +61,5 @@ router.post(
   passportCall('login'),
   login
 );
-
-router.get("/chat",  mostrarVistaChat)
-router.get("/chat/:email",  mostrarVistaChatEmail)
 
 module.exports = router;
