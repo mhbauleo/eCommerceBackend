@@ -1,7 +1,7 @@
 const dotenv = require('dotenv')
 const path = require('path')
 dotenv.config({
-    path: path.resolve(process.cwd(), process.env.NODE_ENV || 'development' + '.env')
+    path: path.resolve(process.cwd(), (process.env.NODE_ENV || 'development') + '.env')
 })
 
 const config = {
@@ -9,6 +9,7 @@ const config = {
     PORT: process.env.PORT || 8080,
     MODO: process.env.MODO || 'FORK',
     PERSISTENCIA: process.env.PERSISTENCIA,
+    EXPIRE_TIME: process.env.EXPIRE_TIME,
     fileSystem: {
         baseUrl: './persistencia/'
     },

@@ -1,7 +1,8 @@
 const fs = require("fs"); 
 const jwt = require('jsonwebtoken')
+const config = require('../config')
 
-const signOptions = { expiresIn: "6h" , algorithm: 'RS256'};
+const signOptions = { expiresIn: config.EXPIRE_TIME , algorithm: 'RS256'};
 const privateKey = fs.readFileSync("./keys/private.pem")
 const publicKey = fs.readFileSync('./keys/public.pem')
 
