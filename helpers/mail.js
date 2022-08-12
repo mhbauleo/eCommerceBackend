@@ -2,8 +2,9 @@ const { createTransport } = require("nodemailer");
 const { errorLogger } = require("./logger");
 const config = require('../config')
 
-const ADMIN_MAIL = "prueba9795@gmail.com";
-const SERVER_MAIL = "prueba9795@gmail.com";
+const ADMIN_MAIL = config.gmail.adminMail;
+const SERVER_MAIL = config.gmail.serverMail;
+const PASSWORD = config.gmail.password
 
 const sendEmail = async (subject, html) => {
   const transporter = createTransport({
@@ -11,7 +12,7 @@ const sendEmail = async (subject, html) => {
     port: 587,
     auth: {
       user: SERVER_MAIL,
-      pass: config.gmail.password,
+      pass: PASSWORD,
     },
   });
 
