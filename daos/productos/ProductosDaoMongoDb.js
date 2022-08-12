@@ -1,9 +1,9 @@
 const ContenedorMongoDb = require("../../contenedores/ContenedorMongoDb");
-const productosEsquema = require("../../schemas/productos");
+const productosModel = require("../../schemas/productos");
 
 class ProductosDaoMongoDb extends ContenedorMongoDb {
   constructor() {
-    super("productos", productosEsquema);
+    super(productosModel);
   }
 
   async getProductsByCategory(categoria) {

@@ -1,7 +1,7 @@
 const ContenedorArchivo = require("../../contenedores/ContenedorArchivo");
 const ProductosDaoArchivo = require("../productos/ProductosDaoArchivo");
 const config = require("../../config");
-const {deleteCarritoAux, getProductosAux, postProductoAux} = require('../../functions/carritos')
+const {deleteCarritoAux, getProductosAux, postProductoAux} = require('./CarritosCrudAux')
 
 class CarritosDaoArchivo extends ContenedorArchivo {
   constructor() {

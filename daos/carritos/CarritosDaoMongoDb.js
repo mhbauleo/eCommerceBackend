@@ -1,11 +1,11 @@
 const ContenedorMongoDb = require("../../contenedores/ContenedorMongoDb");
 const ProductosDaoMongoDb = require("../productos/ProductosDaoMongoDb");
-const carritoEsquema = require("../../schemas/carrito");
-const {deleteCarritoAux, getProductosAux, postProductoAux} = require('../../functions/carritos')
+const carritoModel = require("../../schemas/carrito");
+const {deleteCarritoAux, getProductosAux, postProductoAux} = require('./CarritosCrudAux')
 
 class CarritosDaoMongoDb extends ContenedorMongoDb {
   constructor() {
-    super("carrito", carritoEsquema);
+    super(carritoModel);
     this.productos = new ProductosDaoMongoDb();
   }
 

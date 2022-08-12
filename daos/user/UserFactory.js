@@ -4,7 +4,7 @@ class UserFactoryDao {
     static get(tipo) {
         switch(tipo) {
             case 'MONGO': return new UserDaoMongoDb()
-            default: return new ProductosDaoMongoDb()
+            default: return new UserDaoMongoDb()
         }
     }
 }
