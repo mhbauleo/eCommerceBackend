@@ -1,12 +1,10 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const Joigoose = require("joigoose")(mongoose);
+const joiProductsSchema = require("./joi/productosJoiSchema");
 
-const productosEsquema = new mongoose.Schema({
-    nombre: {type: String, require: true},
-    descripcion: {type:String, require: true},
-    codigo: {type:String, require: true},
-    foto: {type:String, require: true},
-    precio: {type:Number, require: true},
-    stock: {type:Number, require: true}
-},{ timestamps: true })
+const productosEsquema = new mongoose.Schema(
+  Joigoose.convert(joiProductsSchema),
+  { timestamps: true }
+);
 
-module.exports = productosEsquema
+module.exports = mongoose.model("productos", productosEsquema);

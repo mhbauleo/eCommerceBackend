@@ -1,13 +1,10 @@
 const mongoose = require("mongoose");
+const Joigoose = require("joigoose")(mongoose);
+const joiCartSchema = require("./joi/carritoJoiSchema");
 
 const carritoEsquema = new mongoose.Schema(
-  {
-    productos: {
-      type: [],
-      default: [],
-    },
-  },
+  Joigoose.convert(joiCartSchema),
   { timestamps: true }
 );
 
-module.exports = carritoEsquema;
+module.exports = mongoose.model('carrito', carritoEsquema);

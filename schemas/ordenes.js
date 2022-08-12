@@ -1,13 +1,18 @@
 const mongoose = require("mongoose");
+const autoIncrement = require("mongoose-auto-increment");
 
 const ordenesEsquema = new mongoose.Schema(
   {
-    items: {type: String, require: true},
-    nrOrden: {type: Number, require: true},
-    estado: {type: String, require: true},
-    email: {type: String, require: true}
+    items: {
+      type: [],
+      default: [],
+    },
+    estado: { type: String, require: true },
+    email: { type: String, require: true },
   },
   { timestamps: true }
 );
 
-module.exports = ordenesEsquema;
+autoIncrement.initialize(mongoose.connection);
+ordenesEsquema.plugin(autoIncrement.plugin, "ordenes");
+module.exports = mongoose.model("ordenes", ordenesEsquema);

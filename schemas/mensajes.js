@@ -1,13 +1,10 @@
 const mongoose = require("mongoose");
+const Joigoose = require("joigoose")(mongoose);
+const joiMessagesSchema = require("./joi/mensajesJoiSchema");
 
 const mensajesEsquema = new mongoose.Schema(
-  {
-    email: {type: String, require: true},
-    tipo: {type: String, require: true},
-    text: {type: String, require: true},
-    fecha: {type: String, require: true},
-  },
+  Joigoose.convert(joiMessagesSchema),
   { timestamps: true }
 );
 
-module.exports = mensajesEsquema;
+module.exports = mongoose.model('mensajes', mensajesEsquema);
