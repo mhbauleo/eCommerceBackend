@@ -1,0 +1,16 @@
+<div class="container mt-3">
+  <div class="jumbotron">
+    <h2>Centro de mensajes</h2>
+    <div id="mensajes"></div>
+    <form onsubmit="return agregarMensaje(this)">
+      <input type="email" id="email" placeholder="diego@outlook.com" required />
+      <input type="text" id="tipo" placeholder="tipo..." required />
+      <input type="text" id="text" placeholder="Ingrese un mensaje..." />
+      <input type="submit" value="Enviar" />
+    </form>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/main.js"></script>
+{{!-- <script src="js/login.js"></script>  --}}

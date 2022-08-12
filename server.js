@@ -1,23 +1,25 @@
 const express = require("express");
-require('dotenv').config()
+const Socket = require('./services/socket')
 const { errorLogger } = require('./helpers/logger')
+const config = require('./config')
 
 const routerMain = require('./routes/main')
 
 const app = express();
 
 app.use(express.static("./public"));
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use("/", routerMain);
 
 app.all(`*`, (req, res) => {
   res.json({
-    error: -2,
-    descripcion: `ruta ${req.path} método ${req.method} no implementada`,
+    status: 'Error',
+    message: `ruta ${req.path} método ${req.method} no implementada`,
   });
 });
 
-/*----------------------- Motor de plantillas ----------*/
+/*----------------------- Motor de plantillas -----------------------*/
 const hbs = require("express-handlebars");
 
 app.set("views", "./views");
@@ -36,30 +38,27 @@ app.set("view engine", ".hbs");
 
 const cluster = require('cluster')
 const numCPUs = require('os').cpus().length
-const MODO = process.argv[2] || 'FORK'
+const MODO = config.MODO
 
-const PORT = process.env.PORT || 8080;
+const PORT = config.PORT
 
 const modoCluster = MODO == "CLUSTER";
 
 if(modoCluster && cluster.isMaster) {
   console.log(`Master ${process.pid} is running`)
-  //logger.info(`Master ${process.pid} is running`)
   for(let i = 0; i < numCPUs; i++) {
       cluster.fork()
   }
   cluster.on('exit', (worker, code, signal) => {
       console.log(`worker ${worker.process.pid} died ${new Date().toLocaleString()}`)
-      //logger.info(`worker ${worker.process.pid} died ${new Date().toLocaleString()}`)
       cluster.fork();
   })
 } else {
   const server = app.listen(PORT, () => {
-    console.log(`Servidor levantado en el puerto ${server.address().port}`)
+    console.log(`Servidor levantado en el puerto ${PORT} (${config.NODE_ENV} - ${config.PERSISTENCIA})`)
     console.log(`worker ${process.pid} is running`)
-    //logger.info(`Servidor levantado en el puerto ${server.address().port}`)
-    //logger.info(`worker ${process.pid} is running`)
   });
-  
+  new Socket(server)
+
   server.on("error", (error) => errorLogger.error(`hubo un error ${error}`));
 }
