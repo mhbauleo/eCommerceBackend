@@ -8,7 +8,7 @@ const { initializePassport } = require("../passport-config")
 
 const {
   notificarNuevoUsuario
-} = require("../middlewares/mensajes");
+} = require("../middlewares/mail");
 const { passportCall } = require('../middlewares/passport')
 const { userJoiValidator } = require('../middlewares/validators')
 
