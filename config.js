@@ -20,11 +20,6 @@ const config = {
         serverMail: process.env.SERVER_MAIL,
         adminMail: process.env.ADMIN_MAIL,
         password: process.env.GMAIL_PASS
-    },
-    twilio: {
-        SID: process.env.ACCOUNT_SID_TWILIO,
-        TOKEN: process.env.AUTH_TOKEN_TWILIO
     }
-
 }
 module.exports = config

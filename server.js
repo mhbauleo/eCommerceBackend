@@ -12,13 +12,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/", routerMain);
 
-app.all(`*`, (req, res) => {
-  res.json({
-    status: 'Error',
-    message: `ruta ${req.path} método ${req.method} no implementada`,
-  });
-});
-
 /*----------------------- Motor de plantillas -----------------------*/
 const hbs = require("express-handlebars");
 
