@@ -3,9 +3,12 @@ const mostrarVistaChat = (req, res) => {
 }
 
 const mostrarVistaChatEmail = (req, res) => {
-    req.params.email
-    res.render("layouts/chat");
-
+    console.log(req.params.email)
+    res.cookie("messagesEmail", req.params.email).render("layouts/chat-email");
 }
 
-module.exports = { mostrarVistaChat, mostrarVistaChatEmail}
+const mostrarVistaChatAdmin = (req, res) => {
+    res.render("layouts/chat-admin");
+}
+
+module.exports = { mostrarVistaChat, mostrarVistaChatEmail, mostrarVistaChatAdmin }

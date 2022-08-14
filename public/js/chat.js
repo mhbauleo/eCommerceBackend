@@ -9,8 +9,13 @@ socket.on("mensajes", (data) => {
 function renderMensajes(data) {
   const html = data
     .map((mensaje) => {
+      if(mensaje.tipo === 'sistema') {
+        return `<div>
+        <span class="email">To ${mensaje.email}</span> <span class="fecha">[${mensaje.fecha}]</span> : 
+        <em class="mensaje">${mensaje.text}</em></div>`;
+      }
       return `<div>
-        <span class="email">${mensaje.email}</span> <span class="fecha">[${mensaje.fecha}]</span> : 
+        <span class="email">From ${mensaje.email}</span> <span class="fecha">[${mensaje.fecha}]</span> : 
         <em class="mensaje">${mensaje.text}</em></div>`;
     })
     .join(" ");
@@ -22,7 +27,7 @@ function agregarMensaje(e) {
 
   const mensaje = {
     email: document.getElementById("email").value,
-    tipo: document.getElementById("tipo").value,
+    tipo: 'usuario',
     text: document.getElementById("text").value,
     fecha: date,
   };

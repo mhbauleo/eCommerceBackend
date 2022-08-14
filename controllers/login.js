@@ -1,12 +1,10 @@
-const { User } = require("../daos/index");
-const { createToken, verifyWebToken } = require('../helpers/jws')
+const { createToken } = require('../helpers/jws')
 
 const mostrarVistaRegister = (req, res) => {
   res.render("layouts/register");
 };
 
 const mostrarVistaLogin = (req, res) => {
-  console.log(req.user)
   res.render("layouts/login");
 };
 
@@ -21,6 +19,7 @@ const register = (req, res) => {
     message: "Successfully registered",
     payload: {
       token,
+      idCarrito
     },
   })
 };
@@ -30,11 +29,12 @@ const login = (req, res) => {
   const token = createToken({ _id, nombre, idCarrito, email, rol })
 
   console.log(req.user)
-  res.cookie("idCarrito", req.user?.idCarrito).json({
+  res.json({
       status: "Success",
       message: "Successfully logged",
       payload: {
         token,
+        idCarrito
       },
     });
 };
