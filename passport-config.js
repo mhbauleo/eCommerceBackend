@@ -12,13 +12,9 @@ const initializePassport = () => {
       async (req, email, password, done) => {
         const { nombre, direccion, edad, telefono } = req.body;
         try {
-          console.log('register')
-          console.log(email)
           const user = await User.getUserByEmail(email);
-          console.log(user)
 
           if (user) {
-            console.log('here')
             logger.warn("Usuario existente");
             warnLogger.warn("Usuario existente");
             return done(null, false, {
@@ -27,7 +23,6 @@ const initializePassport = () => {
             });
           }
 
-          console.log('newuser')
           const newUser = {
             nombre,
             email,
@@ -38,7 +33,7 @@ const initializePassport = () => {
             idCarrito: await carrito.crear(),
             rol: "member",
           };
-          console.log(newUser)
+
           return done(null, await User.saveAndGetUser(newUser));
         } catch (err) {
           logger.error(err);

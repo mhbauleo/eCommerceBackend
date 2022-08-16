@@ -29,7 +29,7 @@ router.use(cookieParser());
 router.use(
   session({
     store: MongoStore.create({
-      mongoUrl: config.mongo.baseUrl,
+      mongoUrl: config.MONGO.BASE_URL,
       mongoOptions: advancedOptions,
       ttl: 600,
     }),

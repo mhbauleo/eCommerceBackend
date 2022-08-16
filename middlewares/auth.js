@@ -23,7 +23,6 @@ const auth = async (req, res, next) => {
 };
 
 const verifyAdminRole = async (req, res, next) => {
-    console.log(`VerifyAdminRole: ${JSON.stringify(req.user)}`)
     if(req.user.rol === 'admin') {
         next();
     } else {

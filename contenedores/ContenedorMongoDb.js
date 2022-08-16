@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const config = require("../config");
 const { errorLogger } = require("../helpers/logger");
 
-mongoose.connect(config.mongo.baseUrl, {
+mongoose.connect(config.MONGO.BASE_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

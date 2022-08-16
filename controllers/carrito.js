@@ -46,15 +46,10 @@ const deleteProductCart = async (req, res) => {
   }
 };
 
-const comprar = (req, res) => {
-  res.redirect("/carrito");
-};
-
 module.exports = {
   createNewCart,
   deleteCart,
   getProducts,
   addProductToCart,
-  deleteProductCart,
-  comprar,
+  deleteProductCart
 };

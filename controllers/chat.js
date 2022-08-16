@@ -3,7 +3,6 @@ const mostrarVistaChat = (req, res) => {
 }
 
 const mostrarVistaChatEmail = (req, res) => {
-    console.log(req.params.email)
     res.cookie("messagesEmail", req.params.email).render("layouts/chat-email");
 }
 

@@ -9,8 +9,6 @@ const mostrarVistaLogin = (req, res) => {
 };
 
 const register = (req, res) => {
-
-  console.log("user: "+ req.user)
   const { _id, nombre, idCarrito, email, rol } = req.user
   const token = createToken({ _id, nombre, idCarrito, email, rol })
 
@@ -28,7 +26,6 @@ const login = (req, res) => {
   const { _id, nombre, idCarrito, email, rol } = req.user
   const token = createToken({ _id, nombre, idCarrito, email, rol })
 
-  console.log(req.user)
   res.json({
       status: "Success",
       message: "Successfully logged",
