@@ -6,7 +6,7 @@ const passportCall = (strategy) => {
       if (err) {
         return next(err)};
       if (!user) {
-        return res.json(info);
+        return res.status(400).json(info);
       }
       req.user = user;
       next();

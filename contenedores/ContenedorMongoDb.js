@@ -14,7 +14,7 @@ class ContenedorMongoDb {
 
   // Principales
 
-  /* Devuelve  si el objeto es invalido*/ 
+  /* Devuelve id del nuevo elemento */
   async save(objeto) {
     try {
       const { _id } = await this.collection.create(objeto);
@@ -24,7 +24,7 @@ class ContenedorMongoDb {
     }
   }
 
-  // Devuelve null en caso de no encontrar el objeto
+  /* Devuelve null en caso de no encontrar el objeto */
   async getById(idBuscado) {
     try {
       return await this.collection.findById(idBuscado);
@@ -41,6 +41,7 @@ class ContenedorMongoDb {
     }
   }
 
+  /* Devuelve la cantidad de elemento modificados */
   async updateById(newObject, id) {
     try {
       const { modifiedCount } = await this.collection.updateOne(
@@ -53,6 +54,7 @@ class ContenedorMongoDb {
     }
   }
 
+  /* Devuelve la cantidad de elemento borrados */ 
   async deleteById(id) {
     try {
       const { deletedCount } = await this.collection.deleteOne({

@@ -13,20 +13,22 @@ class CarritosDaoMongoDb extends ContenedorMongoDb {
     return await this.save({ productos: [] });
   }
 
-  // Devuelve true si se borró correctamente
+  /* Devuelve true si se borró correctamente */
   async deleteCarrito(id) {
     return await deleteCarritoAux(id, this)
   }
 
-  // Devuelve null en caso de no encontrar el carrito
+  /* Devuelve null en caso de no encontrar el carrito */
   async getProductos(id) {
     return await getProductosAux(id, this)
   }
 
+  /* Devuelve true si pudo agregar el producto */
   async postProducto(idCarrito, idProducto) {
     return await postProductoAux(idCarrito, idProducto, this)
   }
 
+  /* Devuelve true si pudo borrar el producto correctamente */
   async deleteProducto(idCarrito, idProducto) {
     const viejoCarrito = await this.getById(idCarrito);
     if (viejoCarrito != null) {

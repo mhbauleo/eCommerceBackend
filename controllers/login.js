@@ -12,7 +12,7 @@ const register = (req, res) => {
   const { _id, nombre, idCarrito, email, rol } = req.user
   const token = createToken({ _id, nombre, idCarrito, email, rol })
 
-  res.json({
+  res.status(201).json({
     status: "Success",
     message: "Successfully registered",
     payload: {
