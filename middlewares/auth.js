@@ -1,4 +1,5 @@
 const { verifyWebToken } = require("../helpers/jws");
+const { logger } = require("../helpers/logger");
 
 const authorizeToken = (req) => {
   try {
@@ -8,7 +9,7 @@ const authorizeToken = (req) => {
     if (!token) null;
     return verifyWebToken(token);
   } catch (e) {
-    console.log(e);
+    logger.info(e);
   }
 };
 

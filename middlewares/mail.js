@@ -1,7 +1,6 @@
 const { sendEmail } = require("../helpers/mail");
 
 const notificarNuevoUsuario = (req, res, next) => {
-  console.log("notificar")
   const { nombre, email, direccion, edad, telefono, _id } = req.user;
   sendEmail(
     "Nuevo registro",

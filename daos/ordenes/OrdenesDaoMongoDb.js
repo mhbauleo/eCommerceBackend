@@ -2,6 +2,7 @@ const ContenedorMongoDb = require("../../contenedores/ContenedorMongoDb");
 const UserDaoMongoDb = require("../user/UserDaoMongoDb");
 const CarritosDaoMongoDb = require("../carritos/CarritosDaoMongoDb");
 const ordenesModel = require("../../schemas/ordenes");
+const { logger } = require("../../helpers/logger")
 
 
 class OrdenesDaoMongoDb extends ContenedorMongoDb {
@@ -33,7 +34,7 @@ class OrdenesDaoMongoDb extends ContenedorMongoDb {
 
       return { nroOrden: await this.save({ items, estado, email }), items };
     } catch (e) {
-      console.log(e);
+      logger.info(e)
     }
   }
 }

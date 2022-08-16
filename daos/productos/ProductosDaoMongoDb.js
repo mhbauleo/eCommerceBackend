@@ -1,5 +1,6 @@
 const ContenedorMongoDb = require("../../contenedores/ContenedorMongoDb");
 const productosModel = require("../../schemas/productos");
+const { logger } = require("../../helpers/logger");
 
 class ProductosDaoMongoDb extends ContenedorMongoDb {
   constructor() {
@@ -10,7 +11,7 @@ class ProductosDaoMongoDb extends ContenedorMongoDb {
     try {
       return await this.collection.find({ categoria });
     } catch (e) {
-      console.log(e);
+      logger.info(e);
     }
   }
 }
