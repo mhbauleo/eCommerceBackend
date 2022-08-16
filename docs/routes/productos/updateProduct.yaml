@@ -1,0 +1,27 @@
+paths:
+  /api/productos/{id}:
+    put:
+      summary: Update a product
+      tags:
+        - Productos
+      parameters:
+      - name: id
+        in: path
+        description: path parameter takes the product id
+        required: true
+        type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/NewProduct'
+      responses:
+        "200":
+          description: Successfully updated
+        "401":
+          description: Unauthorized
+        "404":
+          description: Product not found Error
+        "422":
+          description: Error message

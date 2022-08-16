@@ -1,0 +1,21 @@
+paths:
+  /api/productos/categoria/{categoria}:
+    get:
+      summary: Gets all the products with given category
+      tags:
+        - Productos
+      parameters:
+      - name: categoria
+        in: path
+        description: path parameter takes the product category
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Every product with given category
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"

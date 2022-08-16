@@ -6,11 +6,30 @@ const config = require('./config')
 const routerMain = require('./routes/main')
 
 const app = express();
+const swaggerUi = require("swagger-ui-express")
+const swaggerJsdoc = require("swagger-jsdoc")
+
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Express API with Swagger",
+      description: "A simple CRUD API application made with Express and documented with Swagger"
+    }
+  },
+  apis: [ './docs/**/*.yaml' ]
+}
+
+const swaggerSpecs = swaggerJsdoc(options)
+const specs = swaggerJsdoc(options)
 
 app.use(express.static("./public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use("/", routerMain);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs))
+
 
 /*----------------------- Motor de plantillas -----------------------*/
 const hbs = require("express-handlebars");
@@ -27,7 +46,7 @@ app.engine(
 
 app.set("view engine", ".hbs");
 
-//--------------------------------------------------------------------------------
+/*-----------------------       Server       -----------------------*/
 
 const cluster = require('cluster')
 const numCPUs = require('os').cpus().length

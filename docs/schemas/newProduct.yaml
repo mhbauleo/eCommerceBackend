@@ -1,0 +1,42 @@
+components:
+  requestBodies:
+    NewProduct:
+      type: object
+      required: 
+        - nombre
+        - descripcion
+        - categoria
+        - codigo
+        - foto
+        - precio
+        - stock
+      properties:
+        nombre:
+          type: string
+          description: The name of the product.
+        descripcion:
+          type: string
+          description: The description of the product.
+        categoria:
+          type: string
+          description: The category of the product.        
+        codigo:
+          type: string
+          description: The code of the product.
+        foto:
+          type: string
+          description: The URL of the product thumbnail.
+        precio:
+          type: number
+          description: The price of the product.
+        stock:
+          type: number
+          description: The stock of the product.
+      example:
+        nombre: Escuadra
+        descripcion: Plantilla con forma de triángulo. 
+        categoria: categoria1
+        codigo: "1965912368"
+        foto: https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png
+        precio: 300
+        stock: 24
