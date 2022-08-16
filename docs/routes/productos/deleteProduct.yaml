@@ -17,5 +17,3 @@ paths:
           description: Unauthorized
         "404":
           description: Product not found Error
-        "422":
-          description: Error message
