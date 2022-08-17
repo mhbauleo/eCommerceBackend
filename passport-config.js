@@ -1,6 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const { User, carrito } = require("./daos/index");
+const userService = require("./services/userService")
+const cartService = require("./services/cartService")
 const { errorLogger, warnLogger, logger } = require("./helpers/logger");;
 const { createHash, isValidPassword } = require("./helpers/bcrypt")
 
@@ -12,7 +13,7 @@ const initializePassport = () => {
       async (req, email, password, done) => {
         const { nombre, direccion, edad, telefono } = req.body;
         try {
-          const user = await User.getUserByEmail(email);
+          const user = await userService.getUserByEmail(email);
 
           if (user) {
             logger.warn("Usuario existente");
@@ -30,11 +31,11 @@ const initializePassport = () => {
             edad,
             telefono,
             password: createHash(password),
-            idCarrito: await carrito.crear(),
+            idCarrito: await cartService.createNewCart(),
             rol: "member",
           };
 
-          return done(null, await User.saveAndGetUser(newUser));
+          return done(null, await userService.saveAndGetUser(newUser));
         } catch (err) {
           logger.error(err);
           errorLogger.error(err);
@@ -56,7 +57,7 @@ const initializePassport = () => {
                 "Se debe agregar un email y una contraseña para loggearse",
             });
 
-          const user = await User.getUserByEmail(email);
+          const user = await userService.getUserByEmail(email);
 
           if (!user) {
             logger.info(`User no found with email ${email}`);
@@ -88,7 +89,7 @@ const initializePassport = () => {
   });
 
   passport.deserializeUser(async (id, done) => {
-    done(null, await User.getById(id));
+    done(null, await userService.getById(id));
   });
 };
 
