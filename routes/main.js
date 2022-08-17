@@ -1,13 +1,13 @@
 const express = require('express')
 const router = express.Router()
 
-const routerProductos = require("./apiProductos");
-const routerCarrito = require("./apiCarrito");
-const routerOrdenes = require("./apiOrdenes")
-const routerLogin = require("./login")
-const routerInfo = require("./info")
-const routerChat = require("./chat")
-const routerNoImplementada = require("./ruta-no-implementada")
+const routerProductos = require("./productsRouter");
+const routerCarrito = require("./cartRouter");
+const routerOrdenes = require("./orderRouter")
+const routerLogin = require("./loginRouter")
+const routerInfo = require("./infoRouter")
+const routerChat = require("./chatRouter")
+const routerNoImplementada = require("./notImplementedRouter")
 
 router.use("/api/productos", routerProductos);
 router.use("/api/carrito", routerCarrito);

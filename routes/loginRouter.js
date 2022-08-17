@@ -17,7 +17,7 @@ const {
   mostrarVistaRegister,
   register,
   login
-} = require("../controllers/login");
+} = require("../controllers/loginController");
 
 const router = express.Router();
 

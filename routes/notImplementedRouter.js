@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const { rutaNoImplementada } = require('../controllers/ruta-no-implementada')
+const { rutaNoImplementada } = require('../controllers/notImplementedRouter')
 
 router.all('*', rutaNoImplementada)
 

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { createNewCart, deleteCart, getProducts, addProductToCart, deleteProductCart } = require('../controllers/carrito')
+const { createNewCart, deleteCart, getProducts, addProductToCart, deleteProductCart } = require('../controllers/cartController')
 const { auth, verifyAdminRole } = require('../middlewares/auth')
 const { verifyCart } = require('../middlewares/cart')
 

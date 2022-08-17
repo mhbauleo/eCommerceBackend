@@ -10,9 +10,6 @@ const config = {
     MODO: process.env.MODO || 'FORK',
     PERSISTENCIA: process.env.PERSISTENCIA,
     EXPIRE_TIME: process.env.EXPIRE_TIME,
-    fileSystem: {
-        baseUrl: './persistencia/'
-    },
     MONGO: {
         BASE_URL: `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.s1kle.mongodb.net/ecommerce?retryWrites=true&w=majority`
     },

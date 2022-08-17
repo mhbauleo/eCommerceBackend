@@ -32,6 +32,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs))
 
 
 /*----------------------- Motor de plantillas -----------------------*/
+
 const hbs = require("express-handlebars");
 
 app.set("views", "./views");

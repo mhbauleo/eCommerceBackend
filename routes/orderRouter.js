@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { newOrder } = require('../controllers/ordenes')
+const { newOrder } = require('../controllers/orderController')
 const { auth } = require('../middlewares/auth')
 const { verifyEmail } = require('../middlewares/order')
 const { orderJoiValidator } = require('../middlewares/validators')
