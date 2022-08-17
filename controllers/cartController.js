@@ -1,17 +1,19 @@
-const { carrito } = require("../daos/index");
+const cartService = require('../services/cartService')
 
 const createNewCart = async (req, res) => {
+  const newId = await cartService.createNewCart()
   res
     .status(201)
     .json({
       status: "Success",
       message: "New Cart",
-      id: await carrito.crear(),
+      id: newId,
     });
 };
 
 const deleteCart = async (req, res) => {
-  if (await carrito.deleteCarrito(req.params.id)) {
+  const wasDeleted = await cartService.deleteCart(req.params.id)
+  if (wasDeleted) {
     res.json({ status: "Success", message: "Cart deleted" });
   } else {
     res.status(404).json({ status: "Error", message: "We couldn't delete the cart" });
@@ -19,16 +21,17 @@ const deleteCart = async (req, res) => {
 };
 
 const getProducts = async (req, res) => {
-  const productos = await carrito.getProductos(req.params.id);
-  if (productos != null) {
-    res.json({ status: 'Success', message: 'Elements found', payload: productos});
+  const products = await cartService.getProducts(req.params.id)
+  if (products != null) {
+    res.json({ status: 'Success', message: 'Elements found', payload: products});
   } else {
     res.status(404).json({ status: "Error", message: "Cart not found" });
   }
 };
 
 const addProductToCart = async (req, res) => {
-  if (await carrito.postProducto(req.params.id, req.params.id_prod)) {
+  const wasAdded = await cartService.addProductToCart(req.params.id, req.params.id_prod)
+  if (wasAdded) {
     res.status(201).json({
         status: "Success",
         message: "Product added",
@@ -39,7 +42,8 @@ const addProductToCart = async (req, res) => {
 };
 
 const deleteProductCart = async (req, res) => {
-  if (await carrito.deleteProducto(req.params.id, req.params.id_prod)) {
+  const wasDeleted = await cartService.deleteProductCart(req.params.id, req.params.id_prod)
+  if (wasDeleted) {
     res.json({ status: 'Success', message: 'Successfully deleted'});
   } else {
     res.status(404).json({ status: 'Error', message: "We couldn't delete"});
