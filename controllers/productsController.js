@@ -1,45 +1,73 @@
-const { productos } = require("../daos/index");
+const productsService = require('../services/productsService')
 
 const getAllProducts = async (req, res) => {
-  res.json({ status: 'Success', message: 'Elements found', payload: await productos.getAll()});
+  const allProducts = await productsService.getAllProducts()
+  res.json({
+    status: "Success",
+    message: "Elements found",
+    payload: allProducts,
+  });
 };
 
 const getProductsByCategory = async (req, res) => {
-  res.json({ status: 'Success', message: 'Elements found', payload: await productos.getProductsByCategory(req.params.categoria)});
-}
+  const productsByCategory = await productsService.getProductsByCategory(req.params.categoria)
+  res.json({
+    status: "Success",
+    message: "Elements found",
+    payload: productsByCategory,
+  });
+};
 
 const getProductById = async (req, res) => {
-  const producto = await productos.getById(req.params.id);
-  if (producto != null) {
-    res.json({ status: 'Success', message: 'Element found', payload: producto});
+  const product = await productsService.getProductById(req.params.id);
+  if (product != null) {
+    res.json({
+      status: "Success",
+      message: "Element found",
+      payload: product,
+    });
   } else {
-    res.status(404).json({ status: 'Error', message: `We couldn't get the element.`});
+    res
+      .status(404)
+      .json({ status: "Error", message: `We couldn't get the element.` });
   }
 };
 
 const saveProduct = async (req, res) => {
-  const nuevoProducto = req.body;
-  const nuevoId = await productos.save(nuevoProducto);
-
-  res.status(201).json({ status: 'Success', message: 'New element added', id: nuevoId });
+  const newId = await productsService.saveProduct(req.body);
+  res
+    .status(201)
+    .json({ status: "Success", message: "New element added", id: newId });
 };
 
 const updateProduct = async (req, res) => {
-  const nuevoProducto = req.body;
-
-  if ((await productos.updateById(nuevoProducto, req.params.id)) > 0) {
-    res.status(200).json({ status: 'Success', message: 'Successfully updated'});
+  const updateCount = await productsService.updateProduct(req.body, req.params.id)
+  if (updateCount > 0) {
+    res
+      .status(200)
+      .json({ status: "Success", message: "Successfully updated" });
   } else {
-    res.status(404).json({ status: 'Error', message: "We couldn't update"});
+    res.status(404).json({ status: "Error", message: "We couldn't update" });
   }
 };
 
 const deleteProduct = async (req, res) => {
-  if ((await productos.deleteById(req.params.id)) > 0) {
-    res.status(200).json({ status: 'Success', message: 'Successfully deleted'});
+  const deleteCount = await productsService.deleteProduct(req.params.id)
+
+  if (deleteCount > 0) {
+    res
+      .status(200)
+      .json({ status: "Success", message: "Successfully deleted" });
   } else {
-    res.status(404).json({ status: 'Error', message: "We couldn't delete"});
+    res.status(404).json({ status: "Error", message: "We couldn't delete" });
   }
 };
 
-module.exports = { getAllProducts, getProductsByCategory, getProductById, saveProduct, updateProduct, deleteProduct }
+module.exports = {
+  getAllProducts,
+  getProductsByCategory,
+  getProductById,
+  saveProduct,
+  updateProduct,
+  deleteProduct,
+};
