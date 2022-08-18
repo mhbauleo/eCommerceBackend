@@ -27,8 +27,9 @@ app.use(express.static("./public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/", routerMain);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs))
+app.use("/", routerMain);
+
 
 
 /*----------------------- Motor de plantillas -----------------------*/

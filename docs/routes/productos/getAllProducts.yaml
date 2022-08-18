@@ -1,5 +1,5 @@
 paths:
-  /api/productos/:
+  /api/productos:
     get:
       summary: Get all products
       tags:
