@@ -1,0 +1,570 @@
+{
+	"info": {
+		"_postman_id": "17f1b98c-fc92-4c74-b091-0665d19fe646",
+		"name": "TP final",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19879210"
+	},
+	"item": [
+		{
+			"name": "productos",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get categoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/productos/categoria/categoria1",
+							"protocol": "https",
+							"host": [
+								"e-commerce-backend75",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos",
+								"categoria",
+								"categoria1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "post Escuadra",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmY0NGI5ZWJmODVmYTA2YjM0YjI0NzUiLCJub21icmUiOiJBZG1pbiIsImlkQ2Fycml0byI6IjAiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbCI6ImFkbWluIiwiaWF0IjoxNjYyNDcyOTg0LCJleHAiOjE2NjI0OTQ1ODR9.cFh911dVAzf7DoHbUQdW6YIC0NtpUtrb-7CFNOw5j4h06s8Zz6Sw6PODFsI76MJsLDR3IzrofEFdImwmx1BVPxW3EgANcLbQjacGL1UwqQRoVGSSVmoUYFyu_HqRcFASr8L5m9879UYEmrMwbufkSvoR0FEtF7r83XzWbHsDO8w",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Escuadra\",\n    \"descripcion\": \"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\",\n    \"categoria\": \"categoria1\",\n    \"codigo\": \"17\",\n    \"foto\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png\",\n    \"precio\": 123,\n    \"stock\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/productos",
+							"protocol": "https",
+							"host": [
+								"e-commerce-backend75",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post Calculadora",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmY0NGI5ZWJmODVmYTA2YjM0YjI0NzUiLCJub21icmUiOiJBZG1pbiIsImlkQ2Fycml0byI6IjAiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbCI6ImFkbWluIiwiaWF0IjoxNjYyNDczODMyLCJleHAiOjE2NjI0OTU0MzJ9.L8ldVxppIAehKt7l3ujNCSNJoLg1Bzksy_OZnCBGoBJbfS2wHQlReifZ4zGyP8DVC54Yqj_JQrT-l8XTKkBPGSB3sh1PZDrZkNa3KZlZGjzGjIuaMSIbh8M5bjENUSiNwgoMIvjb6xLdSNsdt7TJS-TSArK4ksU6jMJUsNOfOHg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"nombre\" : \"Calculadora\",\n \"descripcion\" : \"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\", \n \"categoria\": \"categoria1\",\n \"codigo\" : \"18\", \n \"foto\" : \"https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png\", \n \"precio\" : 223, \n \"stock\": 7\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/productos",
+							"protocol": "https",
+							"host": [
+								"e-commerce-backend75",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post Globo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmY0NGI5ZWJmODVmYTA2YjM0YjI0NzUiLCJub21icmUiOiJBZG1pbiIsImlkQ2Fycml0byI6IjAiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbCI6ImFkbWluIiwiaWF0IjoxNjYyNDczODMyLCJleHAiOjE2NjI0OTU0MzJ9.L8ldVxppIAehKt7l3ujNCSNJoLg1Bzksy_OZnCBGoBJbfS2wHQlReifZ4zGyP8DVC54Yqj_JQrT-l8XTKkBPGSB3sh1PZDrZkNa3KZlZGjzGjIuaMSIbh8M5bjENUSiNwgoMIvjb6xLdSNsdt7TJS-TSArK4ksU6jMJUsNOfOHg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"nombre\" : \"Globo Terráqueo\",\n \"descripcion\" : \"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\", \n \"categoria\": \"categoria2\",\n \"codigo\" : \"19\", \n \"foto\" : \"https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png\", \n \"precio\" : 165, \n \"stock\": 9\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/productos",
+							"protocol": "https",
+							"host": [
+								"e-commerce-backend75",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post Inválido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmY0NGI5ZWJmODVmYTA2YjM0YjI0NzUiLCJub21icmUiOiJBZG1pbiIsImlkQ2Fycml0byI6IjAiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbCI6ImFkbWluIiwiaWF0IjoxNjYyNDczODMyLCJleHAiOjE2NjI0OTU0MzJ9.L8ldVxppIAehKt7l3ujNCSNJoLg1Bzksy_OZnCBGoBJbfS2wHQlReifZ4zGyP8DVC54Yqj_JQrT-l8XTKkBPGSB3sh1PZDrZkNa3KZlZGjzGjIuaMSIbh8M5bjENUSiNwgoMIvjb6xLdSNsdt7TJS-TSArK4ksU6jMJUsNOfOHg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"nombre\" : \"Escuadra\",\n \"descripcion\" : \"coso1\", \n \"categoria\" : \"categoria1\",\n \"codigo\" : \"17\", \n \"foto\" : \"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png\", \n \"precio\" : 123, \n \"stock\" : 2,\n\n \"campo\" : 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/productos",
+							"protocol": "https",
+							"host": [
+								"e-commerce-backend75",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put Inválido",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmY0NGI5ZWJmODVmYTA2YjM0YjI0NzUiLCJub21icmUiOiJBZG1pbiIsImlkQ2Fycml0byI6IjAiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbCI6ImFkbWluIiwiaWF0IjoxNjYyNDczODMyLCJleHAiOjE2NjI0OTU0MzJ9.L8ldVxppIAehKt7l3ujNCSNJoLg1Bzksy_OZnCBGoBJbfS2wHQlReifZ4zGyP8DVC54Yqj_JQrT-l8XTKkBPGSB3sh1PZDrZkNa3KZlZGjzGjIuaMSIbh8M5bjENUSiNwgoMIvjb6xLdSNsdt7TJS-TSArK4ksU6jMJUsNOfOHg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"nombre\" : \"Escuadra\",\n \"descripcion\" : \"coso1\", \n \"categoria\" : \"categoria1\",\n \"codigo\" : \"17\", \n \"foto\" : \"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png\", \n \"precio\" : 123, \n \"stock\": 5,\n \"dfasdf\" :  232\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/productos/62f54f33e45707e9ade24336",
+							"protocol": "https",
+							"host": [
+								"e-commerce-backend75",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos",
+								"62f54f33e45707e9ade24336"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "carrito",
+			"item": [
+				{
+					"name": "crearCarrito",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "borrar Carrito",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmY0NGI5ZWJmODVmYTA2YjM0YjI0NzUiLCJub21icmUiOiJBZG1pbiIsImlkQ2Fycml0byI6IjAiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbCI6ImFkbWluIiwiaWF0IjoxNjYyNDczODMyLCJleHAiOjE2NjI0OTU0MzJ9.L8ldVxppIAehKt7l3ujNCSNJoLg1Bzksy_OZnCBGoBJbfS2wHQlReifZ4zGyP8DVC54Yqj_JQrT-l8XTKkBPGSB3sh1PZDrZkNa3KZlZGjzGjIuaMSIbh8M5bjENUSiNwgoMIvjb6xLdSNsdt7TJS-TSArK4ksU6jMJUsNOfOHg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/carrito/631757d1b4631a200645514a",
+							"protocol": "https",
+							"host": [
+								"e-commerce-backend75",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"carrito",
+								"631757d1b4631a200645514a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Productos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE3NTJiYzM0ZGM3NDU0Nzk5ODVmNWIiLCJub21icmUiOiJudWV2byIsImlkQ2Fycml0byI6IjYzMTc1MmJjMzRkYzc0NTQ3OTk4NWY1OSIsImVtYWlsIjoibnVldm9AZ21haWwuY29tIiwicm9sIjoibWVtYmVyIiwiaWF0IjoxNjYyNDczODAxLCJleHAiOjE2NjI0OTU0MDF9.C9SUkl6Q-FYY-8VDGpOzE1yRPWgXWzjW2njoVME2rrE68sBFhD51mogKF8uevHAzlo-HouvlxCLGoDjiMqYYK81L-GUuPFtUb9BgCDidKFsFhA2CSXVqAKiXOI7WVBvs0_0j0EesbjfFJwRxHKSxiv07ViCa3VEg0LSDGBXBtgI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/carrito/631752bc34dc745479985f59/productos",
+							"protocol": "https",
+							"host": [
+								"e-commerce-backend75",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"carrito",
+								"631752bc34dc745479985f59",
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregar producto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE3NTJiYzM0ZGM3NDU0Nzk5ODVmNWIiLCJub21icmUiOiJudWV2byIsImlkQ2Fycml0byI6IjYzMTc1MmJjMzRkYzc0NTQ3OTk4NWY1OSIsImVtYWlsIjoibnVldm9AZ21haWwuY29tIiwicm9sIjoibWVtYmVyIiwiaWF0IjoxNjYyNDczODAxLCJleHAiOjE2NjI0OTU0MDF9.C9SUkl6Q-FYY-8VDGpOzE1yRPWgXWzjW2njoVME2rrE68sBFhD51mogKF8uevHAzlo-HouvlxCLGoDjiMqYYK81L-GUuPFtUb9BgCDidKFsFhA2CSXVqAKiXOI7WVBvs0_0j0EesbjfFJwRxHKSxiv07ViCa3VEg0LSDGBXBtgI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id_prod\" :2}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/carrito/631752bc34dc745479985f59/productos/631757adb4631a2006455147",
+							"protocol": "https",
+							"host": [
+								"e-commerce-backend75",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"carrito",
+								"631752bc34dc745479985f59",
+								"productos",
+								"631757adb4631a2006455147"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "borrar producto",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE3NTJiYzM0ZGM3NDU0Nzk5ODVmNWIiLCJub21icmUiOiJudWV2byIsImlkQ2Fycml0byI6IjYzMTc1MmJjMzRkYzc0NTQ3OTk4NWY1OSIsImVtYWlsIjoibnVldm9AZ21haWwuY29tIiwicm9sIjoibWVtYmVyIiwiaWF0IjoxNjYyNDczODAxLCJleHAiOjE2NjI0OTU0MDF9.C9SUkl6Q-FYY-8VDGpOzE1yRPWgXWzjW2njoVME2rrE68sBFhD51mogKF8uevHAzlo-HouvlxCLGoDjiMqYYK81L-GUuPFtUb9BgCDidKFsFhA2CSXVqAKiXOI7WVBvs0_0j0EesbjfFJwRxHKSxiv07ViCa3VEg0LSDGBXBtgI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/carrito/631752bc34dc745479985f59/productos/631757a9b4631a2006455143",
+							"protocol": "https",
+							"host": [
+								"e-commerce-backend75",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"carrito",
+								"631752bc34dc745479985f59",
+								"productos",
+								"631757a9b4631a2006455143"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "login",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmVjNjk1ZGE4OTUzMGYzYWE4NmJiZDUiLCJub21icmUiOiJQZXBlIiwiaWRDYXJyaXRvIjoiNjJlYzY5NWRhODk1MzBmM2FhODZiYmQzIiwiaWF0IjoxNjU5Nzc3OTQ4LCJleHAiOjE2NTk3OTk1NDh9.A3chR448eNg0VNWYQy0RGobOM4LsG4PdAqrvph44WIN0HuaVOusCAuVS6ngwgxL2pgEN_F6W5lBwzWU4F_VIsYrR9KeUr15DC-pRkgys0kwKhJybBy7X3RWh6lk17DNS1HfyH22xP9Mw40G5VPElZ4naiqkXNwWhK7It9TWzlRA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"nuevo@gmail.com\",\n    \"password\":\"asd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://e-commerce-backend75.herokuapp.com/login",
+							"protocol": "https",
+							"host": [
+								"e-commerce-backend75",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@gmail.com\",\n    \"password\":\"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://e-commerce-backend75.herokuapp.com/login",
+							"protocol": "https",
+							"host": [
+								"e-commerce-backend75",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmVjNjk1ZGE4OTUzMGYzYWE4NmJiZDUiLCJub21icmUiOiJQZXBlIiwiaWRDYXJyaXRvIjoiNjJlYzY5NWRhODk1MzBmM2FhODZiYmQzIiwiaWF0IjoxNjU5Nzc3OTQ4LCJleHAiOjE2NTk3OTk1NDh9.A3chR448eNg0VNWYQy0RGobOM4LsG4PdAqrvph44WIN0HuaVOusCAuVS6ngwgxL2pgEN_F6W5lBwzWU4F_VIsYrR9KeUr15DC-pRkgys0kwKhJybBy7X3RWh6lk17DNS1HfyH22xP9Mw40G5VPElZ4naiqkXNwWhK7It9TWzlRA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"nuevo\",\n    \"email\": \"nuevo@gmail.com\",\n    \"direccion\": \"Argentina\",\n    \"edad\": \"18\",\n    \"telefono\": \"+541155467878\",\n    \"password\": \"asd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://e-commerce-backend75.herokuapp.com/register",
+							"protocol": "https",
+							"host": [
+								"e-commerce-backend75",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ordenes",
+			"item": [
+				{
+					"name": "newOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE3NTJiYzM0ZGM3NDU0Nzk5ODVmNWIiLCJub21icmUiOiJudWV2byIsImlkQ2Fycml0byI6IjYzMTc1MmJjMzRkYzc0NTQ3OTk4NWY1OSIsImVtYWlsIjoibnVldm9AZ21haWwuY29tIiwicm9sIjoibWVtYmVyIiwiaWF0IjoxNjYyNDczODAxLCJleHAiOjE2NjI0OTU0MDF9.C9SUkl6Q-FYY-8VDGpOzE1yRPWgXWzjW2njoVME2rrE68sBFhD51mogKF8uevHAzlo-HouvlxCLGoDjiMqYYK81L-GUuPFtUb9BgCDidKFsFhA2CSXVqAKiXOI7WVBvs0_0j0EesbjfFJwRxHKSxiv07ViCa3VEg0LSDGBXBtgI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\" : \"nuevo@gmail.com\",\n    \"estado\" : \"generada\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/ordenes",
+							"protocol": "https",
+							"host": [
+								"e-commerce-backend75",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"ordenes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ruta inválida",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://e-commerce-backend75.herokuapp.com/sdfasd/423432sdagasdgsdag",
+					"protocol": "https",
+					"host": [
+						"e-commerce-backend75",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"sdfasd",
+						"423432sdagasdgsdag"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
