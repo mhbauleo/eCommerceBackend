@@ -27,7 +27,7 @@ const verifyAdminRole = async (req, res, next) => {
     if(req.user.rol === 'admin') {
         next();
     } else {
-        res.status(401).json({ message: "Unauthorized" });
+        res.status(401).json({ message: "Unauthorized: requiere rol de administrador" });
     }
 }
 
