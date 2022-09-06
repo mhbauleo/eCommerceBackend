@@ -13,6 +13,7 @@ const { passportCall } = require('../middlewares/passport')
 const { userJoiValidator } = require('../middlewares/validators')
 
 const {
+  mostrarInicio,
   mostrarVistaLogin,
   mostrarVistaRegister,
   register,
@@ -47,6 +48,7 @@ initializePassport()
 
 router.get("/register", mostrarVistaRegister);
 router.get("/login", mostrarVistaLogin);
+router.get("/", mostrarInicio)
 
 router.post(
   "/register",

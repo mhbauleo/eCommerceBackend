@@ -1,5 +1,9 @@
 const { createToken } = require('../helpers/jws')
 
+const mostrarInicio = (req, res) => {
+  res.redirect('/login')
+}
+
 const mostrarVistaRegister = (req, res) => {
   res.render("layouts/register");
 };
@@ -37,6 +41,7 @@ const login = (req, res) => {
 };
 
 module.exports = {
+  mostrarInicio,
   mostrarVistaLogin,
   mostrarVistaRegister,
   register,
