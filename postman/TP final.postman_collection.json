@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "17f1b98c-fc92-4c74-b091-0665d19fe646",
-		"name": "TP final",
+		"_postman_id": "f4e7b6e6-dabd-48aa-8812-8a0720421d67",
+		"name": "TP final eCommerce",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "19879210"
 	},
@@ -13,7 +13,20 @@
 					"name": "getAll",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/productos",
+							"protocol": "https",
+							"host": [
+								"e-commerce-backend75",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos"
+							]
+						}
 					},
 					"response": []
 				},
@@ -44,7 +57,21 @@
 					"name": "getById",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/productos/63175723b4631a200645512a",
+							"protocol": "https",
+							"host": [
+								"e-commerce-backend75",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos",
+								"63175723b4631a200645512a"
+							]
+						}
 					},
 					"response": []
 				},
@@ -55,7 +82,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmY0NGI5ZWJmODVmYTA2YjM0YjI0NzUiLCJub21icmUiOiJBZG1pbiIsImlkQ2Fycml0byI6IjAiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbCI6ImFkbWluIiwiaWF0IjoxNjYyNDcyOTg0LCJleHAiOjE2NjI0OTQ1ODR9.cFh911dVAzf7DoHbUQdW6YIC0NtpUtrb-7CFNOw5j4h06s8Zz6Sw6PODFsI76MJsLDR3IzrofEFdImwmx1BVPxW3EgANcLbQjacGL1UwqQRoVGSSVmoUYFyu_HqRcFASr8L5m9879UYEmrMwbufkSvoR0FEtF7r83XzWbHsDO8w",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmY0NGI5ZWJmODVmYTA2YjM0YjI0NzUiLCJub21icmUiOiJBZG1pbiIsImlkQ2Fycml0byI6IjAiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbCI6ImFkbWluIiwiaWF0IjoxNjYyNDc3MzQ0LCJleHAiOjE2NjI0OTg5NDR9.ag5kxxyiV7FaJaMNOW068KXnGg_a5qb5zQVeChdcu-9bdoKKTUPae-xtvdz4Wt1dq8jGPFluRlFtytfHzOeB2vG-t2R6kRtt20VGsG8uXXOTYCl8gVQvtn2KaEDOHuQAyH7k51R-M1RQEBXbcSO9Obsxv_ZPY_00Azx2hAccnNs",
 								"type": "text"
 							}
 						],
@@ -232,16 +259,65 @@
 				{
 					"name": "put",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmY0NGI5ZWJmODVmYTA2YjM0YjI0NzUiLCJub21icmUiOiJBZG1pbiIsImlkQ2Fycml0byI6IjAiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbCI6ImFkbWluIiwiaWF0IjoxNjYyNDc3MzQ0LCJleHAiOjE2NjI0OTg5NDR9.ag5kxxyiV7FaJaMNOW068KXnGg_a5qb5zQVeChdcu-9bdoKKTUPae-xtvdz4Wt1dq8jGPFluRlFtytfHzOeB2vG-t2R6kRtt20VGsG8uXXOTYCl8gVQvtn2KaEDOHuQAyH7k51R-M1RQEBXbcSO9Obsxv_ZPY_00Azx2hAccnNs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"nombre\" : \"Escuadra\",\n \"descripcion\" : \"coso1\", \n \"categoria\" : \"categoria3\",\n \"codigo\" : \"17\", \n \"foto\" : \"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png\", \n \"precio\" : 123, \n \"stock\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/productos/631764789346e3247958fdfa",
+							"protocol": "https",
+							"host": [
+								"e-commerce-backend75",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos",
+								"631764789346e3247958fdfa"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "delete",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmY0NGI5ZWJmODVmYTA2YjM0YjI0NzUiLCJub21icmUiOiJBZG1pbiIsImlkQ2Fycml0byI6IjAiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbCI6ImFkbWluIiwiaWF0IjoxNjYyNDc3MzQ0LCJleHAiOjE2NjI0OTg5NDR9.ag5kxxyiV7FaJaMNOW068KXnGg_a5qb5zQVeChdcu-9bdoKKTUPae-xtvdz4Wt1dq8jGPFluRlFtytfHzOeB2vG-t2R6kRtt20VGsG8uXXOTYCl8gVQvtn2KaEDOHuQAyH7k51R-M1RQEBXbcSO9Obsxv_ZPY_00Azx2hAccnNs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/productos/631764789346e3247958fdfa",
+							"protocol": "https",
+							"host": [
+								"e-commerce-backend75",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos",
+								"631764789346e3247958fdfa"
+							]
+						}
 					},
 					"response": []
 				}
@@ -253,8 +329,21 @@
 				{
 					"name": "crearCarrito",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/carrito",
+							"protocol": "https",
+							"host": [
+								"e-commerce-backend75",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"carrito"
+							]
+						}
 					},
 					"response": []
 				},
@@ -270,7 +359,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://e-commerce-backend75.herokuapp.com/api/carrito/631757d1b4631a200645514a",
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/carrito/631765159346e3247958fe06",
 							"protocol": "https",
 							"host": [
 								"e-commerce-backend75",
@@ -280,7 +369,7 @@
 							"path": [
 								"api",
 								"carrito",
-								"631757d1b4631a200645514a"
+								"631765159346e3247958fe06"
 							]
 						}
 					},
@@ -298,7 +387,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://e-commerce-backend75.herokuapp.com/api/carrito/631752bc34dc745479985f59/productos",
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/carrito/631765159346e3247958fe06/productos",
 							"protocol": "https",
 							"host": [
 								"e-commerce-backend75",
@@ -308,7 +397,7 @@
 							"path": [
 								"api",
 								"carrito",
-								"631752bc34dc745479985f59",
+								"631765159346e3247958fe06",
 								"productos"
 							]
 						}
@@ -336,7 +425,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://e-commerce-backend75.herokuapp.com/api/carrito/631752bc34dc745479985f59/productos/631757adb4631a2006455147",
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/carrito/631765159346e3247958fe06/productos/631757adb4631a2006455147",
 							"protocol": "https",
 							"host": [
 								"e-commerce-backend75",
@@ -346,7 +435,7 @@
 							"path": [
 								"api",
 								"carrito",
-								"631752bc34dc745479985f59",
+								"631765159346e3247958fe06",
 								"productos",
 								"631757adb4631a2006455147"
 							]
@@ -366,7 +455,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://e-commerce-backend75.herokuapp.com/api/carrito/631752bc34dc745479985f59/productos/631757a9b4631a2006455143",
+							"raw": "https://e-commerce-backend75.herokuapp.com/api/carrito/631765159346e3247958fe06/productos/631757a9b4631a2006455143",
 							"protocol": "https",
 							"host": [
 								"e-commerce-backend75",
@@ -376,7 +465,7 @@
 							"path": [
 								"api",
 								"carrito",
-								"631752bc34dc745479985f59",
+								"631765159346e3247958fe06",
 								"productos",
 								"631757a9b4631a2006455143"
 							]
